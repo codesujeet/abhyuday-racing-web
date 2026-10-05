@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<defs>
+<pattern id="d" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#EE7234" fill-opacity=".22"/></pattern>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171A22"/><stop offset="1" stop-color="#0D0F14"/></linearGradient>
+</defs>
+<rect width="800" height="1000" fill="url(#b)"/>
+<rect width="800" height="1000" fill="url(#d)"/>
+<g stroke="#EE7234" stroke-width="4" fill="none">
+<path d="M40 100V40h60"/><path d="M700 40h60v60"/><path d="M40 900v60h60"/><path d="M700 960h60v-60"/>
+</g>
+<text x="50%" y="46%" text-anchor="middle" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="62" fill="#F4F5F7">PORTRAIT</text>
+<text x="50%" y="46%" dy="68" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#EE7234" letter-spacing="2">PLACEHOLDER · 4:5 · JPG · 800×1000</text>
+<text x="50%" y="940" text-anchor="middle" font-family="Consolas, monospace" font-size="22" fill="#8A90A0">media/originals/portrait.jpg</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<defs>
+<pattern id="d" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#EE7234" fill-opacity=".22"/></pattern>
+<linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#171A22"/><stop offset="1" stop-color="#0D0F14"/></linearGradient>
+</defs>
+<rect width="1200" height="900" fill="url(#b)"/>
+<rect width="1200" height="900" fill="url(#d)"/>
+<g stroke="#EE7234" stroke-width="4" fill="none">
+<path d="M40 100V40h60"/><path d="M1100 40h60v60"/><path d="M40 800v60h60"/><path d="M1100 860h60v-60"/>
+</g>
+<text x="50%" y="46%" text-anchor="middle" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="69" fill="#F4F5F7">NATRAX ENDURANCE RUN</text>
+<text x="50%" y="46%" dy="76" text-anchor="middle" font-family="Consolas, monospace" font-size="29" fill="#EE7234" letter-spacing="2">PLACEHOLDER · 4:3 · JPG · 2000×1500</text>
+<text x="50%" y="840" text-anchor="middle" font-family="Consolas, monospace" font-size="25" fill="#8A90A0">media/originals/natrax-endurance.jpg</text>
+</svg>
