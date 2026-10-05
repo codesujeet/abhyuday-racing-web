@@ -225,20 +225,26 @@ h1, h2, h3 { text-wrap: balance; }
 .cursor-dot { position: fixed; left: 0; top: 0; z-index: 151; pointer-events: none; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--orange); }
 
 /* ==========================================================================
-   Preloader — tachometer
+   Landing intro — logo, orange glow, typed hashtag, logo flies to the nav
    ========================================================================== */
-.preloader { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; background: var(--bg); animation: preloader-auto 0.6s 3s forwards; }
+.preloader { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; background: #000; animation: preloader-auto 0.6s 4.5s forwards; }
 .skip-preload .preloader { display: none; }
 @keyframes preloader-auto { to { opacity: 0; visibility: hidden; } }
 .preloader.is-js { animation: none; }
-.tach { position: relative; width: min(300px, 70vw); display: grid; place-items: center; }
-.tach svg { width: 100%; height: auto; overflow: visible; }
-.tach-needle { transform-origin: 150px 150px; transition: transform 0.12s linear; }
-.tach-readout { position: absolute; bottom: 4%; text-align: center; }
-.tach-readout strong { display: block; font-family: var(--font-display); font-size: 3rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
-.preloader-inner { display: grid; justify-items: center; gap: 8px; }
-.tach-logo { width: 140px; height: auto; }
-.preloader-wipe { position: fixed; inset: 0; z-index: 121; background: var(--orange); transform: scaleY(0); transform-origin: bottom; pointer-events: none; }
+.intro { display: grid; justify-items: center; gap: 14px; padding: 0 var(--gutter); text-align: center; }
+.intro-logo-wrap { position: relative; display: grid; place-items: center; }
+.intro-logo { position: relative; z-index: 1; width: clamp(150px, 22vw, 260px); height: auto; animation: intro-logo 0.9s var(--ease-out) both; will-change: transform; }
+.intro-glow { position: absolute; width: 170%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(238 114 52 / 0.7) 0%, rgb(238 114 52 / 0.25) 38%, transparent 70%); filter: blur(10px); animation: intro-glow 1.2s var(--ease-out) both, intro-pulse 2.4s 1.2s ease-in-out infinite; }
+.intro-name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.32em; font-size: clamp(0.85rem, 1.6vw, 1.1rem); color: #fff; margin-right: -0.32em; animation: intro-fade 0.8s 0.45s var(--ease-out) both; }
+.intro-tag { margin-top: clamp(28px, 8vh, 80px); min-height: 1.2em; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.08em; font-size: clamp(1.4rem, 3.4vw, 2.4rem); color: #fff; text-shadow: 0 0 18px rgb(238 114 52 / 0.75), 0 0 2px rgb(255 255 255 / 0.6); white-space: nowrap; }
+.intro-caret { display: inline-block; width: 0.08em; height: 0.9em; margin-left: 0.08em; vertical-align: -0.08em; background: var(--orange); animation: intro-caret 0.8s steps(1) infinite; }
+.preloader.is-flying .intro-name, .preloader.is-flying .intro-tag, .preloader.is-flying .intro-glow { opacity: 0; transition: opacity 0.35s; animation: none; }
+.is-preloading .nav .brand img { opacity: 0; }
+@keyframes intro-logo { from { opacity: 0; transform: scale(0.82); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes intro-glow { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+@keyframes intro-pulse { 50% { opacity: 0.7; transform: scale(0.94); } }
+@keyframes intro-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes intro-caret { 50% { opacity: 0; } }
 
 /* ==========================================================================
    Hero
@@ -254,7 +260,7 @@ h1, h2, h3 { text-wrap: balance; }
 .hero h1 { display: grid; gap: 14px; }
 .hero-team { font-family: var(--font-mono); font-weight: 500; font-size: clamp(0.8rem, 1.4vw, 0.95rem); letter-spacing: 0.22em; text-transform: uppercase; color: var(--orange); display: flex; align-items: center; gap: 12px; }
 .hero-team::before { content: ""; width: 34px; height: 2px; background: currentColor; }
-.hero-tag { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(3.6rem, 13vw, 11.5rem); line-height: 0.84; letter-spacing: -0.02em; }
+.hero-tag { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.6rem, 7vw, 6.2rem); line-height: 0.9; letter-spacing: -0.02em; }
 .hero-tag .w { display: inline-block; overflow: hidden; vertical-align: top; margin-right: 0.2em; padding-bottom: 0.04em; }
 .hero-tag .w:last-child { margin-right: 0; }
 .hero-tag .w > span { display: inline-block; }

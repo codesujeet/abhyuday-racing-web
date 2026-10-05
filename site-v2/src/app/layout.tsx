@@ -34,8 +34,8 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-// Runs before first paint: skip the preloader if already seen this session or if the visitor prefers less motion.
-const preloadGate = `try{if(sessionStorage.getItem("tar-preloaded")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("skip-preload")}catch(e){}`;
+// Runs before first paint: the intro plays on every load, except for visitors who prefer less motion.
+const preloadGate = `try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("skip-preload")}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

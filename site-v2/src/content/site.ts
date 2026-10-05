@@ -5,6 +5,8 @@ export const site = {
   name: "Team Abhyuday Racing",
   shortName: "Abhyuday Racing",
   tagline: "Arise. Conquer. Repeat.",
+  // Hashtag typed out in the landing intro.
+  introTag: "#ARISE CONQUER REPEAT",
   college: "G. H. Raisoni College of Engineering & Management, Pune",
   collegeShort: "GHRCEM Pune",
   founded: 2023,
