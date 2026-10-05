@@ -42,3 +42,5 @@ next-env.d.ts
 
 # generated from media/originals by scripts/build-images.mjs
 /public/img/
+
+.vercel

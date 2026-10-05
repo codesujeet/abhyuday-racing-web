@@ -5,6 +5,8 @@ import { ModelViewer3D } from "@/components/ModelViewer3D";
 import { Picture, hasPhoto } from "@/components/Picture";
 import { SeasonTabs } from "@/components/SeasonTabs";
 import { Slot } from "@/components/Slot";
+import { Play } from "lucide-react";
+import { AebStop } from "@/components/AebStop";
 import { Chevrons } from "@/components/Chevrons";
 import { autonomySteps, film, garage, news, programmes, proof, season2026, upcoming } from "@/content/home";
 import { partners } from "@/content/partners";
@@ -71,9 +73,7 @@ export default function Home() {
               See the 2026 season
             </Link>
             <Link className="btn btn-line" href="/#film">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M7 4l13 8-13 8z" />
-              </svg>
+              <Play size={16} fill="currentColor" aria-hidden="true" />
               Watch the season film
             </Link>
           </div>
@@ -115,6 +115,7 @@ export default function Home() {
             <Picture name="aeb-stop" alt="A10 stopped short of the target car on the braking test lane" sizes="(min-width: 1240px) 1144px, 92vw" />
             <figcaption>The braking test at Sri Sairam Engineering College, Chennai, 2 August 2026.</figcaption>
           </figure>
+          <AebStop />
           <ol className="steps">
             {autonomySteps.map((s) => (
               <li key={s.title}>
@@ -136,8 +137,8 @@ export default function Home() {
             <p className="lede">{season2026.lede}</p>
           </div>
           <ol className="course">
-            {season2026.stops.map((s) => (
-              <li key={s.title} className={s.result ? "result" : undefined}>
+            {season2026.stops.map((s, i) => (
+              <li key={s.title} className={s.result ? "result" : undefined} style={{ "--i": i } as React.CSSProperties}>
                 <span className="when">{s.when}</span>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Play } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 /**
@@ -11,7 +12,7 @@ export function FilmPlayer({ youtubeId, title, channelUrl, poster }: { youtubeId
 
   const playIcon = (
     <span className="play" aria-hidden="true">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="#131A35"><path d="M8 5l11 7-11 7z" /></svg>
+      <Play size={28} fill="#131A35" stroke="#131A35" strokeWidth={1.5} />
     </span>
   );
 

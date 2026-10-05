@@ -180,7 +180,8 @@ p { margin: 0; }
 
 /* ---------- seasons ---------- */
 .seasons { padding-bottom: clamp(72px, 9vw, 128px); }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.tabs { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.tab-indicator { position: absolute; top: 0; left: 0; width: 0; height: 4px; border-radius: 2px; background: var(--orange); pointer-events: none; }
 .tab { min-height: 48px; padding: 0 22px; border-radius: 4px; border: 2px solid var(--navy); background: transparent; color: var(--navy); font-family: var(--display); font-style: italic; font-weight: 800; font-stretch: 120%; font-size: var(--s-22); cursor: pointer; }
 .tab[aria-selected="true"] { background: var(--navy); color: var(--white); }
 .tab:not([aria-selected="true"]):hover { background: var(--white); }
@@ -220,6 +221,8 @@ p { margin: 0; }
 .car-card img, .slot { width: 100%; aspect-ratio: 4 / 3; border-radius: 6px; object-fit: cover; object-position: 72% 50%; }
 .slot { border: 2px dashed var(--slot); background: var(--chalk); display: grid; place-items: center; text-align: center; padding: 16px; color: var(--slate); font-size: var(--s-16); }
 .slot strong { display: block; color: var(--navy); }
+.slot-icon { display: block; margin: 0 auto 8px; color: var(--slate); }
+.film .slot-icon { color: var(--on-navy); }
 .car-card h3 { font-family: var(--display); font-weight: 750; font-stretch: 110%; font-size: var(--s-30); line-height: 1; }
 .car-card p { font-size: var(--s-16); color: var(--slate); }
 
@@ -277,7 +280,7 @@ p { margin: 0; }
 .people-list .person { font-weight: 700; font-size: var(--s-22); }
 .people-list .role { color: var(--slate); }
 .people-list .honour { display: block; color: var(--orange-ink); font-weight: 700; font-size: var(--s-16); }
-.lead-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 24px; }
+.lead-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr)); gap: clamp(14px, 3vw, 24px); }
 .lead { display: flex; flex-direction: column; gap: 12px; }
 .lead img, .lead .slot { aspect-ratio: 4 / 5; border-radius: 6px; object-fit: cover; }
 .lead .name { font-weight: 700; font-size: var(--s-18); }
@@ -340,6 +343,76 @@ p { margin: 0; }
 .join-chevrons { position: absolute; top: 0; right: 0; height: 100%; width: clamp(120px, 20vw, 300px); }
 .join .wrap { padding-right: max(var(--gutter), clamp(140px, 22vw, 320px)); }
 
+/* ---------- braking demo (static, final state) ---------- */
+.stop-demo { --car: clamp(84px, 22vw, 132px); --target: clamp(66px, 17vw, 100px); --gap: 14px; margin: 28px 0 0; background: var(--white); border: 1px solid var(--rule); border-radius: 6px; padding: 18px clamp(14px, 3vw, 28px) 16px; display: grid; gap: 14px; }
+.stop-lane { position: relative; container-type: inline-size; height: calc(var(--car) * 0.6 + 14px); background: linear-gradient(90deg, var(--rule) 0 24px, transparent 24px 40px) left bottom / 40px 3px repeat-x; }
+.stop-car { position: absolute; left: 0; bottom: 5px; width: var(--car); height: auto; transform: translateX(calc(100cqi - var(--car) - var(--target) - var(--gap))); }
+.stop-brake { opacity: 1; }
+.stop-target { position: absolute; right: 0; bottom: 5px; width: var(--target); }
+.stop-target svg { display: block; width: 100%; height: auto; }
+.stop-frame { position: absolute; inset: -6px -6px -2px; border: 2px dashed var(--sky); border-radius: 4px; opacity: 1; }
+.stop-readout { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; }
+.stop-speed { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: var(--s-14); color: var(--slate); }
+.stop-bar { display: block; width: clamp(110px, 30vw, 220px); height: 8px; border-radius: 99px; background: var(--chalk); overflow: hidden; }
+.stop-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--cobalt), var(--orange)); transform-origin: left; transform: scaleX(0); }
+.stop-status { display: grid; margin: 0; font-family: var(--display); font-weight: 750; font-stretch: 110%; font-size: var(--s-18); }
+.stop-status span { grid-area: 1 / 1; }
+.stop-status .s1, .stop-status .s2 { visibility: hidden; }
+.stop-status .s3 { color: var(--orange-ink); }
+.stop-demo figcaption { font-size: var(--s-14); color: var(--slate); }
+
+/* ---------- motion: compositor-only transforms and opacity, no downloads ---------- */
+.hero-photo { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  /* A10 rolls into the hero once on load. */
+  .hero-photo img { animation: arrive 1.3s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes arrive { from { transform: translateX(-2.5%) scale(1.06); } to { transform: none; } }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Header stripe fills as the page scrolls, like lap progress. */
+    .livery-tape { position: relative; }
+    .livery-tape::after { content: ""; position: absolute; inset: 0; background: var(--rule); transform-origin: right; animation: tape-fill linear both; animation-timeline: scroll(root block); }
+    @keyframes tape-fill { from { transform: scaleX(0.94); } to { transform: scaleX(0); } }
+
+    /* Braking demo plays as it scrolls through the screen. */
+    .stop-demo { view-timeline: --stop block; }
+    .stop-car, .stop-bar i, .stop-brake, .stop-frame, .stop-status span { animation-timeline: --stop; animation-range: entry 80% contain 45%; animation-fill-mode: both; }
+    .stop-car { animation-name: stop-drive; animation-timing-function: linear; }
+    @keyframes stop-drive {
+      0% { transform: translateX(0); animation-timing-function: linear; }
+      40% { transform: translateX(calc((100cqi - var(--car) - var(--target) - var(--gap)) * 0.55)); animation-timing-function: cubic-bezier(.15,.75,.3,1); }
+      100% { transform: translateX(calc(100cqi - var(--car) - var(--target) - var(--gap))); }
+    }
+    .stop-bar i { animation-name: stop-speed; animation-timing-function: linear; }
+    @keyframes stop-speed { 0%, 40% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+    .stop-brake { animation-name: stop-brake; }
+    @keyframes stop-brake { 0%, 39% { opacity: 0.15; } 42%, 100% { opacity: 1; } }
+    .stop-frame { animation-name: stop-frame; }
+    @keyframes stop-frame { 0%, 22% { opacity: 0; } 30%, 100% { opacity: 1; } }
+    .stop-status .s1, .stop-status .s2 { visibility: visible; }
+    .stop-status .s1 { animation-name: stop-s1; }
+    .stop-status .s2 { animation-name: stop-s2; }
+    .stop-status .s3 { animation-name: stop-s3; }
+    @keyframes stop-s1 { 0%, 24% { opacity: 0; } 28%, 40% { opacity: 1; } 44%, 100% { opacity: 0; } }
+    @keyframes stop-s2 { 0%, 42% { opacity: 0; } 46%, 92% { opacity: 1; } 96%, 100% { opacity: 0; } }
+    @keyframes stop-s3 { 0%, 94% { opacity: 0; } 98%, 100% { opacity: 1; } }
+
+    /* Season course line draws stop by stop. */
+    .course { view-timeline: --course block; }
+    .course li::before, .course li::after, .course li > * { animation-timeline: --course; animation-fill-mode: both; animation-timing-function: linear; animation-range: cover calc(12% + var(--i) * 4%) cover calc(18% + var(--i) * 4%); }
+    .course li::before { transform-origin: left; animation-name: course-line; }
+    @keyframes course-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .course li::after { animation-name: course-stop; }
+    .course li.result::after { animation-name: course-result; }
+    @keyframes course-stop { from { transform: scale(0.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes course-result { 0% { transform: scale(0.3); opacity: 0; } 70% { transform: scale(1.45); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+    .course li > * { animation-name: course-text; }
+    @keyframes course-text { from { opacity: 0.25; } to { opacity: 1; } }
+  }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
   .nav a:not(.btn) { padding: 0 8px; font-size: var(--s-14); }
@@ -368,6 +441,9 @@ p { margin: 0; }
 }
 @media (max-width: 760px) {
   .plate { margin-top: -36px; }
+  .tabs { gap: 6px; }
+  .tab { flex: 1 1 0; padding: 0 8px; font-size: var(--s-18); }
+  .lead .slot { font-size: var(--s-14); }
   .join-chevrons { display: none; }
   .join .wrap { padding-right: var(--gutter); }
   .page-band-body { width: auto; flex: 1; }

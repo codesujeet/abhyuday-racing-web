@@ -1,6 +1,7 @@
 "use client";
 
 import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 
 export function GarageCarousel({ heading, children }: { heading: ReactNode; children: ReactNode }) {
@@ -28,10 +29,10 @@ export function GarageCarousel({ heading, children }: { heading: ReactNode; chil
         {heading}
         <div className="garage-controls">
           <button className="round-btn" type="button" aria-label="Previous car" disabled={!canPrev} onClick={() => emblaApi?.scrollPrev()}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+            <ChevronLeft size={22} strokeWidth={2.4} aria-hidden="true" />
           </button>
           <button className="round-btn" type="button" aria-label="Next car" disabled={!canNext} onClick={() => emblaApi?.scrollNext()}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+            <ChevronRight size={22} strokeWidth={2.4} aria-hidden="true" />
           </button>
         </div>
       </div>

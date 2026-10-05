@@ -13,8 +13,11 @@
     "model": "node scripts/optimize-model.mjs"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.9.0",
     "@google/model-viewer": "^4.3.1",
     "embla-carousel-react": "^8.6.0",
+    "lucide-react": "^1.52.0",
+    "motion": "^14.0.0",
     "next": "16.3.8",
     "photoswipe": "^5.4.4",
     "react": "19.2.8",

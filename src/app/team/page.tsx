@@ -52,7 +52,7 @@ export default function TeamPage() {
                 {hasPhoto(l.photo) ? (
                   <Picture name={l.photo} alt={l.name} sizes="240px" />
                 ) : (
-                  <Slot title="Add a portrait" hint="Upright photo, 4:5" />
+                  <Slot title="Add a portrait" hint="Upright photo, 4:5" person />
                 )}
                 <span className={`name${l.name.startsWith("[") ? " todo" : ""}`}>{l.name}</span>
                 <span className="role">{l.role}</span>

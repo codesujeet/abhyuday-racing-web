@@ -1,5 +1,6 @@
 "use client";
 
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useEffect, useMemo, useState } from "react";
 import "photoswipe/style.css";
 import images from "@/content/generated/images.json";
@@ -11,6 +12,8 @@ const manifest = images as Record<string, { width: number; height: number; width
 
 export function MediaGallery({ items }: { items: MediaItem[] }) {
   const [tag, setTag] = useState<MediaTag | "All">("All");
+  // Photos glide to their new places when the filter changes. auto-animate skips this for reduced motion.
+  const [gridRef] = useAutoAnimate<HTMLUListElement>({ duration: 260, easing: "ease-out" });
   const shown = useMemo(() => (tag === "All" ? items : items.filter((i) => i.tag === tag)), [items, tag]);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
           </button>
         ))}
       </div>
-      <ul className="gallery" id="gallery">
+      <ul className="gallery" id="gallery" ref={gridRef}>
         {shown.map((item) => {
           const entry = item.photo ? manifest[item.photo] : undefined;
           const large = entry ? entry.widths.at(-1) : undefined;

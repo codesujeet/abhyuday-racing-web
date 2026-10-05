@@ -1,12 +1,43 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { animate } from "motion/mini";
+import { useEffect, useRef, useState } from "react";
 import type { Season } from "@/content/seasons";
 
 export function SeasonTabs({ seasons, initial }: { seasons: Season[]; initial: string }) {
   const [index, setIndex] = useState(Math.max(0, seasons.findIndex((s) => s.year === initial)));
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const indicator = useRef<HTMLSpanElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const firstRender = useRef(true);
   const season = seasons[index];
+
+  // Slide the orange indicator under the chosen year and fade the panel in (motion's small WAAPI helper).
+  useEffect(() => {
+    const tab = tabs.current[index];
+    const bar = indicator.current;
+    if (!tab || !bar) return;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches || firstRender.current;
+    const place = { x: tab.offsetLeft, y: tab.offsetTop + tab.offsetHeight + 4, width: tab.offsetWidth };
+    animate(bar, { transform: `translate(${place.x}px, ${place.y}px)`, width: `${place.width}px` }, { duration: still ? 0 : 0.35, ease: [0.2, 0.8, 0.2, 1] });
+    if (!still && panel.current) {
+      animate(panel.current, { opacity: [0, 1], transform: ["translateY(8px)", "none"] }, { duration: 0.28, ease: "easeOut" });
+    }
+    firstRender.current = false;
+  }, [index]);
+
+  // Keep the indicator under the chosen tab when the tabs reflow (rotation, window resize).
+  useEffect(() => {
+    const onResize = () => {
+      const tab = tabs.current[index];
+      const bar = indicator.current;
+      if (!tab || !bar) return;
+      bar.style.transform = `translate(${tab.offsetLeft}px, ${tab.offsetTop + tab.offsetHeight + 4}px)`;
+      bar.style.width = `${tab.offsetWidth}px`;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [index]);
 
   const onKey = (e: React.KeyboardEvent, i: number) => {
     const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
@@ -20,6 +51,7 @@ export function SeasonTabs({ seasons, initial }: { seasons: Season[]; initial: s
   return (
     <>
       <div className="tabs" role="tablist" aria-label="Choose a season">
+        <span className="tab-indicator" ref={indicator} aria-hidden="true" />
         {seasons.map((s, i) => (
           <button
             key={s.year}
@@ -40,7 +72,7 @@ export function SeasonTabs({ seasons, initial }: { seasons: Season[]; initial: s
           </button>
         ))}
       </div>
-      <div className="season-panel" role="tabpanel" id="season-panel" aria-labelledby={`tab-${season.year}`} tabIndex={0}>
+      <div className="season-panel" ref={panel} role="tabpanel" id="season-panel" aria-labelledby={`tab-${season.year}`} tabIndex={0}>
         <div className="season-intro">
           <h3>{season.title}</h3>
           <p>{season.intro}</p>
