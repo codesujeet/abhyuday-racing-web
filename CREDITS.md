@@ -29,5 +29,8 @@ Both are self-hosted at build time by `next/font`.
 | [@google/model-viewer](https://modelviewer.dev) | Apache-2.0 | 3D car viewer |
 | [Embla Carousel](https://www.embla-carousel.com) | MIT | Car-by-year carousel |
 | [PhotoSwipe](https://photoswipe.com) | MIT | Photo lightbox on the media page |
+| [Motion](https://motion.dev) (`motion/mini`) | MIT | Season tab indicator and panel fade |
+| [AutoAnimate](https://auto-animate.formkit.com) | MIT | Media grid reflow when filtering |
+| [Lucide](https://lucide.dev) | ISC | Icons |
 | [sharp](https://sharp.pixelplumbing.com) | Apache-2.0 | Photo resizing (build only) |
 | [glTF Transform](https://gltf-transform.dev), [meshoptimizer](https://github.com/zeux/meshoptimizer) | MIT | 3D model compression (build only) |
