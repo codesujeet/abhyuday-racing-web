@@ -5,18 +5,12 @@ import { ModelViewer3D } from "@/components/ModelViewer3D";
 import { Picture, hasPhoto } from "@/components/Picture";
 import { SeasonTabs } from "@/components/SeasonTabs";
 import { Slot } from "@/components/Slot";
+import { Chevrons } from "@/components/Chevrons";
 import { autonomySteps, film, garage, news, programmes, proof, season2026, upcoming } from "@/content/home";
 import { partners } from "@/content/partners";
 import { results } from "@/content/results";
 import { defaultSeason, seasons } from "@/content/seasons";
 import { site } from "@/content/site";
-
-const chevrons = [
-  { fill: "#EE7234", points: "62,0 112,0 192,150 112,300 62,300 142,150" },
-  { fill: "#2D5BB7", points: "112,0 156,0 236,150 156,300 112,300 192,150" },
-  { fill: "#47A3DC", points: "156,0 192,0 272,150 192,300 156,300 236,150" },
-  { fill: "#B88BE0", points: "192,0 218,0 298,150 218,300 192,300 272,150" },
-];
 
 function resultRows() {
   const years = [...new Set(results.map((r) => r.year))];
@@ -65,21 +59,7 @@ export default function Home() {
               off-road cars for BAJA SAEINDIA.
             </p>
           </div>
-          <svg className="chevrons" viewBox="0 0 300 300" preserveAspectRatio="none" aria-hidden="true">
-            <polygon points="0,0 70,0 150,150 70,300 0,300" fill="#131A35" />
-            {chevrons.map((c, i) => (
-              <polygon
-                key={c.fill}
-                className="chev"
-                style={{ "--i": i } as React.CSSProperties}
-                points={c.points}
-                fill={c.fill}
-                stroke="#131A35"
-                strokeWidth="6"
-                strokeLinejoin="round"
-              />
-            ))}
-          </svg>
+          <Chevrons />
         </div>
       </section>
 
@@ -337,6 +317,7 @@ export default function Home() {
       </section>
 
       <section className="join" id="join" aria-labelledby="join-title">
+        <Chevrons base="#EE7234" className="chevrons join-chevrons" animate={false} />
         <div className="wrap">
           <h2 className="display" id="join-title">
             Build the next car with us

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHead } from "@/components/PageHead";
 import { Picture, hasPhoto } from "@/components/Picture";
 import { Slot } from "@/components/Slot";
 import { alumni, departments, faculty, leads, mentors, squads } from "@/content/team";
@@ -12,14 +13,10 @@ export const metadata: Metadata = {
 export default function TeamPage() {
   return (
     <>
-      <section className="page-head">
-        <div className="wrap">
-          <h1 className="display">The crew</h1>
-          <p className="lede muted">
-            Students from every branch, guided by faculty and mentors, with every past season&apos;s crew kept on record.
-          </p>
-        </div>
-      </section>
+      <PageHead
+        title="The crew"
+        lede="Students from every branch, guided by faculty and mentors, with every past season's crew kept on record."
+      />
 
       <section className="block" aria-labelledby="faculty-title">
         <div className="wrap">

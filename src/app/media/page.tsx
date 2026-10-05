@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MediaGallery } from "@/components/MediaGallery";
+import { PageHead } from "@/components/PageHead";
 import { Slot } from "@/components/Slot";
 import { films, mediaItems } from "@/content/media";
 import { site } from "@/content/site";
@@ -13,10 +14,9 @@ export default function MediaPage() {
   const youtube = site.socials.find((s) => s.label === "YouTube")?.href ?? "#";
   return (
     <>
-      <section className="page-head">
+      <PageHead title="Media" lede="Photos from the workshop, testing and competitions. Select a photo to see it full size." />
+      <section className="block" aria-label="Photos">
         <div className="wrap">
-          <h1 className="display">Media</h1>
-          <p className="lede muted">Photos from the workshop, testing and competitions. Select a photo to see it full size.</p>
           <MediaGallery items={mediaItems} />
         </div>
       </section>
