@@ -1,0 +1,19 @@
+Sponsor logos — downloaded 2026-10-04 from each company's own website. Not modified or recoloured.
+Files in _raw\ are the untouched downloads.
+
+ipg_automotive.svg          https://www.ipg-automotive.com/_assets/77909b040f11a5a342bdff1944423d8b/Images/ipg-logo.svg
+kvaser.svg                  https://kvaser.com/wp-content/themes/kvaser/assets/images/new-homepage/kvaser-red-logo.svg
+automotive_test_systems_85px.png  http://www.ats-india.net/img/logo.png   (only 85x85 px on their site; HTTPS cert on ats-india.net is broken, fetched over HTTP)
+vector_informatik_white.svg https://www.vector.com/dam/jcr:346318bd-c86e-4218-8a60-30ccf2d9479a/Vector-Logo-white-RGB.svg
+                            (brand-provided white version; shown on Vector brand red #B70032 as on vector.com)
+solidworks.svg              https://www.3ds.com/assets/3ds-navigation/3DS_corporate-logo_solidworks.svg  (linked from solidworks.com)
+ansys_black.png / ansys_white.png  https://images.ansys.com/is/image/ansys/ansys-logo-black  /  ansys-logo-white  (official Ansys image server)
+belrise_industries.png      https://belriseindustries.com/assets/site/images/bellogo.png
+traco_power_white.svg       https://www.tracopower.com/themes/custom/traco/logo.svg
+                            (brand-provided white version; shown on TRACO navy #00283C, from tracopower.com CSS)
+MathWorks                   NOT DOWNLOADED — mathworks.com returns HTTP 403 to scripted requests. Styled text placeholder until supplied.
+
+UPDATE 2026-10-04: mathworks_user_supplied.png — supplied by the team (900x175, white background, no transparency).
+Used as-is on a white tile. Source of the file not verified as official; replace if MathWorks' sponsor kit provides one.
+
+UPDATE: mathworks_user_supplied.png is served as mathworks.png (resized to 520 px wide). belrise_industries.png resized to 520 px wide.
