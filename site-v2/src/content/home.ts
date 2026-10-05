@@ -3,17 +3,12 @@
 
 export const hero = {
   kicker: "Autonomous & electric off-road racing · GHRCEM Pune",
-  headline: "Arise. Conquer. Repeat.",
+  // Hero headline, one string per line. The second word is drawn in orange.
+  headline: ["Rise, Conquer,", "Repeat"],
   lede: "We are the student motorsport team of G. H. Raisoni College of Engineering & Management, Pune — designing, building and racing a buggy that drives itself.",
   ctas: [
     { label: "Meet the Cars", href: "#cars" },
     { label: "Support Us", href: "#support" },
-  ],
-  // Small HUD readouts over the hero image. Facts only.
-  hud: [
-    { label: "Vehicle", value: "A10" },
-    { label: "Class", value: "aBAJA" },
-    { label: "AEB 2026", value: "Winner" },
   ],
 };
 

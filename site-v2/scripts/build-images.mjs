@@ -84,7 +84,7 @@ async function buildBrand(manifest) {
   if (manifest["hero-a10-aeb-run"]) {
     const logo = await sharp(emblem).resize({ width: 300 }).toBuffer();
     const shade = Buffer.from(
-      `<svg width="1200" height="630"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0A0B0F" stop-opacity=".92"/><stop offset=".6" stop-color="#0A0B0F" stop-opacity=".35"/><stop offset="1" stop-color="#0A0B0F" stop-opacity="0"/></linearGradient></defs><rect width="1200" height="630" fill="url(#g)"/><rect y="610" width="1200" height="20" fill="#EE7234"/><text x="60" y="440" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="76" fill="#fff">TEAM ABHYUDAY RACING</text><text x="62" y="500" font-family="Consolas, monospace" font-size="26" fill="#EE7234" letter-spacing="4">ARISE. CONQUER. REPEAT.</text></svg>`,
+      `<svg width="1200" height="630"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0A0B0F" stop-opacity=".92"/><stop offset=".6" stop-color="#0A0B0F" stop-opacity=".35"/><stop offset="1" stop-color="#0A0B0F" stop-opacity="0"/></linearGradient></defs><rect width="1200" height="630" fill="url(#g)"/><rect y="610" width="1200" height="20" fill="#EE7234"/><text x="60" y="440" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="76" fill="#fff">TEAM ABHYUDAY RACING</text><text x="62" y="500" font-family="Consolas, monospace" font-size="26" fill="#EE7234" letter-spacing="4">RISE. CONQUER. REPEAT.</text></svg>`,
     );
     await sharp(hero)
       .resize({ width: 1200, height: 630, fit: "cover", position: "right" })

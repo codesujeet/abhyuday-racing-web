@@ -53,7 +53,8 @@ export function Hero() {
     return () => mm.revert();
   }, []);
 
-  const words = hero.headline.split(" ");
+  // Word index across all lines, so each word rises in turn and the second word is orange.
+  let n = 0;
   // Wait for the preloader on the first visit of the session.
   const go = useSiteReady();
   const delay = 0.1;
@@ -76,11 +77,18 @@ export function Hero() {
             {site.name}
           </motion.span>
           <span className="hero-tag">
-            {words.map((w, i) => (
-              <span className="w" key={i}>
-                <motion.span initial={{ y: "105%" }} animate={go ? { y: 0 } : undefined} transition={{ duration: 1.1, delay: delay + 0.12 + i * 0.12, ease }}>
-                  {w}
-                </motion.span>{" "}
+            {hero.headline.map((line) => (
+              <span className="hero-line" key={line}>
+                {line.split(" ").map((w) => {
+                  const i = n++;
+                  return (
+                    <span className={`w ${i === 1 ? "is-accent" : ""}`} key={w}>
+                      <motion.span initial={{ y: "105%" }} animate={go ? { y: 0 } : undefined} transition={{ duration: 1.1, delay: delay + 0.12 + i * 0.12, ease }}>
+                        {w}
+                      </motion.span>{" "}
+                    </span>
+                  );
+                })}
               </span>
             ))}
           </span>
@@ -107,23 +115,6 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.dl className="hero-hud" initial={{ opacity: 0, x: 24 }} animate={go ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.9, delay: delay + 0.9, ease }}>
-        <div>
-          <dt>Status</dt>
-          <dd style={{ color: "var(--orange)" }}>● Tracking</dd>
-        </div>
-        {hero.hud.map((h) => (
-          <div key={h.label}>
-            <dt>{h.label}</dt>
-            <dd>{h.value}</dd>
-          </div>
-        ))}
-      </motion.dl>
-
-      <div className="scroll-cue" aria-hidden="true">
-        SCROLL
-        <span className="line" />
-      </div>
     </section>
   );
 }

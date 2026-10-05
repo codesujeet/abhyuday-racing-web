@@ -19,7 +19,6 @@ export function Nav({ onHome = true }: { onHome?: boolean }) {
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(!onHome);
   const [open, setOpen] = useState(false);
-  const fillRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const openRef = useRef(false);
@@ -31,8 +30,6 @@ export function Nav({ onHome = true }: { onHome?: boolean }) {
     const update = () => {
       raf = 0;
       const y = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (fillRef.current) fillRef.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
       const heroH = onHome ? window.innerHeight * 0.85 : 40;
       setSolid(y > heroH);
       if (navPinned()) setHidden(false);
@@ -124,12 +121,7 @@ export function Nav({ onHome = true }: { onHome?: boolean }) {
       <header className={`nav ${solid || open ? "is-solid" : ""} ${hidden ? "is-hidden" : ""}`}>
         <div className="wrap nav-inner">
           <Link href={onHome ? "#home" : "/"} className="brand" onClick={onHome ? onNav : undefined} aria-label={`${site.name} — home`}>
-            <img src="/brand/emblem-160.webp" alt="" width={52} height={38} />
-            <span className="brand-word">
-              Abhyuday
-              <br />
-              Racing
-            </span>
+            <img src="/brand/emblem-320.webp" alt="" width={84} height={61} />
           </Link>
 
           <nav aria-label="Sections">
@@ -161,10 +153,6 @@ export function Nav({ onHome = true }: { onHome?: boolean }) {
               <span />
             </span>
           </button>
-        </div>
-        <div className="revbar" aria-hidden="true">
-          <div ref={fillRef} className="revbar-fill" />
-          <div className="revbar-ticks" />
         </div>
       </header>
 

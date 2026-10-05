@@ -21,7 +21,7 @@ Decisions agreed with the team before the build:
 | Sky | `#47A3DC` | A10 wrap cyan (`--sky`) |
 | Lilac | `#B88BE0` | A10 wrap stripe (`--lilac`) |
 | Older orange | `#FF6B00` | `baja/src/app/globals.css` — not used |
-| Tagline | "Arise. Conquer. Repeat." | `abhyuday-racing-web/src/content/site.ts`, `baja/src/lib/site-config.ts` |
+| Tagline | "Rise. Conquer. Repeat." — confirmed by the team (both repos say "Arise", now corrected) | `abhyuday-racing-web/src/content/site.ts`, `baja/src/lib/site-config.ts` |
 | Founded | 2023 | `baja/src/lib/site-config.ts` (`founded: 2023`); alumni batch "2023–24 Founding crew" in `abhyuday-racing-web/src/content/team.ts` |
 
 ## 1. Home (`src/content/home.ts`, `site.ts`, `stats.ts`)

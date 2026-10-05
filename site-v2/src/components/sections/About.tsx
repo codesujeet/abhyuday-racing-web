@@ -1,11 +1,10 @@
-import { about, autonomySteps, competitions, programmes, subteams } from "@/content/home";
+import { about, competitions, programmes } from "@/content/home";
 import { stats } from "@/content/stats";
 import { Counter } from "@/components/ui/Counter";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { ArrowRight } from "@/components/ui/Icons";
 
-/** The rest of the Home section: who we are, what we do, where we compete, counters, sub-teams. */
+/** The rest of the Home section: who we are, what we do, where we compete, counters. */
 export function About() {
   return (
     <section className="section" aria-labelledby="about-title">
@@ -59,27 +58,6 @@ export function About() {
           ))}
         </RevealGroup>
 
-        {/* How the autonomy works */}
-        <div className="pipeline">
-          <Reveal className="pipeline-head">
-            <h3>
-              How A10
-              <br />
-              drives itself
-            </h3>
-            <p className="hud">Perception → Planning → Control</p>
-          </Reveal>
-          <RevealGroup as="ol" className="pipeline-steps" stagger={0.1}>
-            {autonomySteps.map((s, i) => (
-              <RevealItem as="li" key={s.title}>
-                <span className="num">{`0${i + 1} //`}</span>
-                <h4>{s.title}</h4>
-                <p>{s.body}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-
         {/* Where we compete */}
         <div className="compete">
           <Reveal>
@@ -118,41 +96,6 @@ export function About() {
         </div>
       </div>
 
-      {/* Sub-teams */}
-      <div className="wrap subteams">
-        <Reveal className="pipeline-head">
-          <h3 className="display" style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}>
-            Five sub-teams.
-            <br />
-            One car.
-          </h3>
-          <p className="hud">Departments</p>
-        </Reveal>
-        <RevealGroup className="subteam-grid">
-          {subteams.map((t, i) => (
-            <RevealItem key={t.name} as="article" className="subteam">
-              <span className="subteam-idx" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="hud">{t.role}</p>
-              <h4>{t.name}</h4>
-              <p>{t.body}</p>
-            </RevealItem>
-          ))}
-          <RevealItem as="article" className="subteam subteam-cta">
-            <div>
-              <p className="hud" style={{ color: "var(--bg)" }}>
-                Recruitment
-              </p>
-              <h4>Join the crew</h4>
-              <p>No experience needed — we train you from zero. Students from every branch are welcome.</p>
-            </div>
-            <a href="#support">
-              Get in touch <ArrowRight size={18} />
-            </a>
-          </RevealItem>
-        </RevealGroup>
-      </div>
     </section>
   );
 }

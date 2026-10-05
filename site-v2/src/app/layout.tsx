@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Saira_Condensed } from "next/font/google";
-import { Cursor } from "@/components/layout/Cursor";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/layout/Preloader";
 import { Providers } from "@/components/layout/Providers";
@@ -52,7 +51,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <Footer />
         </Providers>
-        <Cursor />
         <div className="grain" aria-hidden="true" />
       </body>
     </html>

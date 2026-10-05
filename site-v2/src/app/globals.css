@@ -181,7 +181,8 @@ h1, h2, h3 { text-wrap: balance; }
 .nav.is-hidden { transform: translateY(-100%); }
 .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 12px; min-height: 44px; }
-.brand img { width: 52px; height: auto; }
+.brand img { width: 84px; height: auto; }
+@media (max-width: 640px) { .brand img { width: 68px; } }
 .brand-word { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
 .brand-word small { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--orange); }
 .nav-links { display: none; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
@@ -262,9 +263,10 @@ h1, h2, h3 { text-wrap: balance; }
 .hero-team::before { content: ""; width: 34px; height: 2px; background: currentColor; }
 .hero-tag { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.6rem, 7vw, 6.2rem); line-height: 0.9; letter-spacing: -0.02em; }
 .hero-tag .w { display: inline-block; overflow: hidden; vertical-align: top; margin-right: 0.2em; padding-bottom: 0.04em; }
-.hero-tag .w:last-child { margin-right: 0; }
+.hero-line .w:last-child { margin-right: 0; }
 .hero-tag .w > span { display: inline-block; }
-.hero-tag .w:nth-child(2) > span { color: var(--orange); }
+.hero-line { display: block; }
+.hero-tag .w.is-accent > span { color: var(--orange); }
 .hero-lede { margin-top: 26px; max-width: 34em; color: #d0d4dd; font-size: clamp(1.02rem, 1.5vw, 1.2rem); }
 .hero .btn-row { margin-top: 30px; }
 .hero-hud { position: absolute; right: var(--gutter); bottom: clamp(40px, 8vh, 96px); display: none; gap: 2px; min-width: 230px; }
