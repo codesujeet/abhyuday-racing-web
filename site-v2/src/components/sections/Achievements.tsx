@@ -3,7 +3,8 @@
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { achievements, type Result } from "@/content/achievements";
-import { gsap } from "@/lib/gsap";
+import { burstAround } from "@/lib/confetti";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { Picture } from "@/components/ui/Picture";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Trophy } from "@/components/ui/Icons";
@@ -38,6 +39,20 @@ export function Achievements() {
         { scaleY: 0 },
         { scaleY: 1, ease: "none", scrollTrigger: { trigger: tl.current, start: "top 65%", end: "bottom 65%", scrub: 0.6 } },
       );
+      // Party popper when the line reaches each year title (it tracks the 65% mark of the screen). Once per year.
+      tl.current?.querySelectorAll<HTMLElement>(".tl-year").forEach((year) => {
+        ScrollTrigger.create({
+          trigger: year.querySelector(".tl-label"),
+          start: "top 65%",
+          once: true,
+          onEnter: () => {
+            const card = year.querySelector(".tl-card");
+            const media = year.querySelector(".tl-media");
+            if (card) burstAround(card, 14);
+            if (media) window.setTimeout(() => burstAround(media, 14), 150);
+          },
+        });
+      });
     });
     return () => mm.revert();
   }, []);

@@ -409,14 +409,15 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .tl-year { position: relative; display: grid; gap: 22px; }
 @media (min-width: 1024px) {
-  /* Year title centred on the line; photos and cards side by side below, always the same height. */
+  /* Photos and cards share one row below the title, so they are always the same height. */
   .tl-year { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 32px 120px; align-items: start; }
-  .tl-year .tl-label { grid-column: 1 / -1; grid-row: 1; justify-self: center; text-align: center; position: relative; z-index: 1; background: var(--bg); padding: 8px 28px; }
+  /* Criss-cross: the year title sits above the photos, on alternating sides of the line. */
+  .tl-year .tl-label { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; }
+  .tl-year:nth-child(even of .tl-year) .tl-label { grid-column: 2; justify-self: start; text-align: left; }
   .tl-year .tl-media { grid-column: 1; grid-row: 2; }
   .tl-year .tl-card { grid-column: 2; grid-row: 2; }
   .tl-year:nth-child(even of .tl-year) .tl-media { grid-column: 2; }
   .tl-year:nth-child(even of .tl-year) .tl-card { grid-column: 1; }
-  .tl-year .tl-dot { display: none; }
 }
 .tl-dot { position: absolute; left: -33px; top: 22px; width: 18px; height: 18px; background: var(--bg); border: 3px solid var(--orange); transform: rotate(45deg); }
 @media (min-width: 1024px) { .tl-dot { left: 50%; top: 40px; margin-left: -9px; } }
