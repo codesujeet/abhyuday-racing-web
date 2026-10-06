@@ -121,7 +121,7 @@ export function Nav({ onHome = true }: { onHome?: boolean }) {
       <header className={`nav ${solid || open ? "is-solid" : ""} ${hidden ? "is-hidden" : ""}`}>
         <div className="wrap nav-inner">
           <Link href={onHome ? "#home" : "/"} className="brand" onClick={onHome ? onNav : undefined} aria-label={`${site.name} — home`}>
-            <img src="/brand/emblem-320.webp" alt="" width={84} height={61} />
+            <img src="/brand/emblem-320.webp" alt="" width={124} height={91} />
           </Link>
 
           <nav aria-label="Sections">

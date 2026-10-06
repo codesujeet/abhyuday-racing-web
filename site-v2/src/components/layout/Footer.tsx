@@ -69,10 +69,6 @@ export function Footer() {
         </div>
       </div>
 
-      <p className="footer-band" aria-hidden="true">
-        Abhyuday Racing
-      </p>
-
       <div className="wrap footer-bottom">
         <span>
           © {year} {site.name}, {site.collegeShort}.
