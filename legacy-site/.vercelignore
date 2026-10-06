@@ -1,0 +1,5 @@
+# Vercel builds these itself
+node_modules
+.next
+out
+public/img
