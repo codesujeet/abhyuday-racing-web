@@ -8,7 +8,7 @@
 <g stroke="#EE7234" stroke-width="4" fill="none">
 <path d="M40 100V40h60"/><path d="M1500 40h60v60"/><path d="M40 900v60h60"/><path d="M1500 960h60v-60"/>
 </g>
-<text x="50%" y="46%" text-anchor="middle" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="77" fill="#F4F5F7">2025 ABAJA CAR</text>
+<text x="50%" y="46%" text-anchor="middle" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="77" fill="#F4F5F7">A07 · 2025 ABAJA CAR</text>
 <text x="50%" y="46%" dy="85" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#EE7234" letter-spacing="2">PLACEHOLDER · 16:10 · JPG · 2400×1500</text>
 <text x="50%" y="940" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#8A90A0">media/originals/car-2025-abaja.jpg</text>
 </svg>

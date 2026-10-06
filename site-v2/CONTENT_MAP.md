@@ -67,6 +67,8 @@ All from `abhyuday-racing-web/src/content/results.ts`, venues/dates from `season
 
 ## 4. Cars (`src/content/cars.ts`)
 
+Car codes and line-up confirmed by the team: A10 (aBAJA 2026), E26 (eBAJA 2026), A07 (aBAJA 2025), E25 (eBAJA 2025), E24 (eBAJA 2024), plus an eBAJA 2027 teaser. Car names are placeholders.
+
 | Car | Source | Notes |
 |---|---|---|
 | **A10** (2026, aBAJA) | `home.ts` garage + season 2026 timeline + autonomy text; `results.ts`; photos in `media/originals`; 3D model `public/models/a10.glb` | Specs limited to what the repo states (camera + radar, ROS 2, Simulink, CarMaker, CAN, drive-by-wire). Weight, power, top speed, compute: **TBA**. |

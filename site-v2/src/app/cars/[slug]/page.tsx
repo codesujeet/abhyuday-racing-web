@@ -133,6 +133,7 @@ export default async function CarPage({ params }: { params: Promise<{ slug: stri
           </div>
         </section>
 
+        {(car.highlights.length > 0 || car.timeline) && (
         <section className="section" aria-labelledby="tech-title">
           <div className="wrap">
             <SectionHead index="02" kicker="Design & technology" id="tech-title" title={<>Under the <em>skin</em></>} />
@@ -172,6 +173,8 @@ export default async function CarPage({ params }: { params: Promise<{ slug: stri
             )}
           </div>
         </section>
+
+        )}
 
         <section className="section" aria-labelledby="photos-title">
           <div className="wrap">

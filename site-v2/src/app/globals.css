@@ -725,3 +725,7 @@ h1, h2, h3 { text-wrap: balance; }
 .comp { transition: box-shadow 0.35s, border-color 0.35s; }
 .comp.is-abaja:hover { box-shadow: 0 0 60px -10px rgb(238 114 52 / 0.6); }
 .comp.is-ebaja:hover { box-shadow: 0 0 60px -10px rgb(71 163 220 / 0.6); }
+
+/* Garage cards: code, name placeholder, class */
+.car-name { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--muted); margin-top: -10px; }
+.car-specs-one { grid-template-columns: 1fr; }

@@ -7,11 +7,12 @@
 // Specs: use "TBA" for anything not confirmed. Never guess numbers.
 
 export type Spec = { label: string; value: string };
-export type CarAngle = { photo: string; alt: string; stat: string; label: string };
 
 export type Car = {
   slug: string;
-  name: string;
+  name: string; // car code, e.g. "A10"
+  carName: string; // the car's name. TODO: replace the "[Car name]" placeholders
+  cls: string; // class line shown on the home card
   year: number;
   category: "aBAJA" | "eBAJA";
   built: boolean;
@@ -25,8 +26,6 @@ export type Car = {
   specs: Spec[]; // full spec sheet on the detail page
   highlights: { title: string; body: string }[];
   results: { title: string; result: string; win?: boolean }[];
-  // Featured-car reveal on the home page: one key fact per angle.
-  angles?: CarAngle[];
   // 3D model in public/models. Leave empty to show the placeholder.
   model?: string;
   modelNote?: string;
@@ -39,6 +38,8 @@ export const cars: Car[] = [
   {
     slug: "a10",
     name: "A10",
+    carName: "[Car name]",
+    cls: "aBAJA · Autonomous",
     year: 2026,
     category: "aBAJA",
     built: true,
@@ -89,12 +90,6 @@ export const cars: Car[] = [
       { title: "aBAJA 2026 · MathWorks Advanced Simulation", result: "First runner-up" },
       { title: "aBAJA 2026 · Virtual round", result: "All India Rank 2" },
     ],
-    angles: [
-      { photo: "hero-a10-aeb-run", alt: "A10 side view on a test run", stat: "Winner", label: "Autonomous Emergency Braking" },
-      { photo: "aeb-stop", alt: "A10 front three-quarter view stopping for an obstacle", stat: "Camera + Radar", label: "Perception" },
-      { photo: "pit-bay", alt: "A10 in the pit bay", stat: "Winner", label: "Manufacturing Excellence" },
-      { photo: "night-testing", alt: "A10 under floodlights at night", stat: "AIR 2", label: "Virtual round" },
-    ],
     model: "/models/a10.glb",
     modelNote: "Our CAD model of the A10 chassis, roll cage and suspension. Body panels and sensors are not in this version yet. About 2.5 MB — it loads only when you ask.",
     timelineTitle: "Six months from first simulation to the podium",
@@ -110,8 +105,38 @@ export const cars: Car[] = [
     ],
   },
   {
-    slug: "abaja-2025",
-    name: "aBAJA debut car",
+    slug: "e26",
+    name: "E26",
+    carName: "[Car name]",
+    cls: "eBAJA · Electric",
+    year: 2026,
+    category: "eBAJA",
+    built: true,
+    tagline: "Our 2026 electric off-roader.",
+    description: "Our 2026 eBAJA car, raced in the four-hour endurance race at NATRAX, Pithampur.",
+    photo: "car-2026-ebaja",
+    photoAlt: "Photo of E26, the 2026 eBAJA car (placeholder)",
+    gallery: [],
+    keySpecs: [
+      { label: "Class", value: "eBAJA · electric" },
+      { label: "Season", value: "2026" },
+    ],
+    specs: [
+      { label: "Category", value: "eBAJA SAEINDIA (electric)" },
+      { label: "Season", value: "2026" },
+      { label: "Powertrain", value: "TBA" },
+      { label: "Battery", value: "TBA" },
+      { label: "Kerb weight", value: "TBA" },
+      { label: "Top speed", value: "TBA" },
+    ],
+    highlights: [],
+    results: [{ title: "eBAJA 2026 · Four-hour endurance race", result: "Finished" }],
+  },
+  {
+    slug: "a07",
+    name: "A07",
+    carName: "[Car name]",
+    cls: "aBAJA · Autonomous",
     year: 2025,
     category: "aBAJA",
     built: true,
@@ -119,7 +144,7 @@ export const cars: Car[] = [
     description:
       "Our first autonomous car of our own, raced in our debut aBAJA season at the Global Automotive Research Centre, Oragadam, Chennai. It finished All India Rank 5 overall and won Best Adaptive Cruise Control.",
     photo: "car-2025-abaja",
-    photoAlt: "Photo of the 2025 aBAJA car (placeholder)",
+    photoAlt: "Photo of A07, the 2025 aBAJA car (placeholder)",
     gallery: [],
     keySpecs: [
       { label: "Class", value: "aBAJA · autonomous" },
@@ -146,8 +171,38 @@ export const cars: Car[] = [
     ],
   },
   {
-    slug: "ebaja-2024",
-    name: "First eBAJA car",
+    slug: "e25",
+    name: "E25",
+    carName: "[Car name]",
+    cls: "eBAJA · Electric",
+    year: 2025,
+    category: "eBAJA",
+    built: true,
+    tagline: "Our 2025 electric off-roader.",
+    description: "Our 2025 eBAJA car, raced at BV Raju Institute of Technology, Hyderabad.",
+    photo: "car-2025-ebaja",
+    photoAlt: "Photo of E25, the 2025 eBAJA car (placeholder)",
+    gallery: [],
+    keySpecs: [
+      { label: "Class", value: "eBAJA · electric" },
+      { label: "Season", value: "2025" },
+    ],
+    specs: [
+      { label: "Category", value: "eBAJA SAEINDIA (electric)" },
+      { label: "Season", value: "2025" },
+      { label: "Powertrain", value: "TBA" },
+      { label: "Battery", value: "TBA" },
+      { label: "Kerb weight", value: "TBA" },
+      { label: "Top speed", value: "TBA" },
+    ],
+    highlights: [],
+    results: [{ title: "eBAJA 2025 · Women's endurance run (driver Sakshi Kute)", result: "Second runner-up" }],
+  },
+  {
+    slug: "e24",
+    name: "E24",
+    carName: "[Car name]",
+    cls: "eBAJA · Electric",
     year: 2024,
     category: "eBAJA",
     built: true,
@@ -155,7 +210,7 @@ export const cars: Car[] = [
     description:
       "Our first electric off-roader, designed, welded and assembled in our own workshop and unveiled on campus on 1 March 2024. It started the team's eBAJA programme.",
     photo: "car-2024-ebaja",
-    photoAlt: "Photo of the 2024 eBAJA car (placeholder)",
+    photoAlt: "Photo of E24, the 2024 eBAJA car (placeholder)",
     gallery: [],
     keySpecs: [
       { label: "Class", value: "eBAJA · electric" },
@@ -183,8 +238,10 @@ export const cars: Car[] = [
   {
     slug: "2027",
     name: "Next car",
+    carName: "[Car name]",
+    cls: "eBAJA · Electric",
     year: 2027,
-    category: "aBAJA",
+    category: "eBAJA",
     built: false,
     tagline: "In design now. We'll show it here first.",
     description: "Reveal date to be announced.",
@@ -199,4 +256,3 @@ export const cars: Car[] = [
 ];
 
 export const builtCars = cars.filter((c) => c.built);
-export const featuredCar = cars.find((c) => c.current) ?? builtCars[0];

@@ -21,8 +21,10 @@ const WIDTHS = [480, 960, 1440, 1920];
 // Drop media/originals/<name>.jpg in and the placeholder is replaced automatically.
 const PLACEHOLDERS = [
   { name: "team-group", w: 1600, h: 900, label: "Team group photo", spec: "16:9 · JPG · 2400×1350" },
-  { name: "car-2024-ebaja", w: 1600, h: 1000, label: "2024 eBAJA car", spec: "16:10 · JPG · 2400×1500" },
-  { name: "car-2025-abaja", w: 1600, h: 1000, label: "2025 aBAJA car", spec: "16:10 · JPG · 2400×1500" },
+  { name: "car-2024-ebaja", w: 1600, h: 1000, label: "E24 · 2024 eBAJA car", spec: "16:10 · JPG · 2400×1500" },
+  { name: "car-2025-abaja", w: 1600, h: 1000, label: "A07 · 2025 aBAJA car", spec: "16:10 · JPG · 2400×1500" },
+  { name: "car-2026-ebaja", w: 1600, h: 1000, label: "E26 · 2026 eBAJA car", spec: "16:10 · JPG · 2400×1500" },
+  { name: "car-2025-ebaja", w: 1600, h: 1000, label: "E25 · 2025 eBAJA car", spec: "16:10 · JPG · 2400×1500" },
   { name: "car-2027-next", w: 1600, h: 1000, label: "2027 car — under wraps", spec: "16:10 · JPG · 2400×1500" },
   { name: "portrait", w: 800, h: 1000, label: "Portrait", spec: "4:5 · JPG · 800×1000" },
   { name: "natrax-endurance", w: 1200, h: 900, label: "NATRAX endurance run", spec: "4:3 · JPG · 2000×1500" },
