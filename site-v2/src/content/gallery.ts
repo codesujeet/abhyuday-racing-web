@@ -1,7 +1,9 @@
-// Photos and films in the Gallery section. Source: abhyuday-racing-web/src/content/media.ts.
+// Photos and films for the home photo wall and the full gallery page (/gallery/).
+// Source: abhyuday-racing-web/src/content/media.ts.
 // `photo` = file name in media/originals without extension. If the file is missing,
-// the placeholder of the same name in public/placeholders is shown.
-export const galleryTags = ["aBAJA 2026", "eBAJA", "Workshop", "Events", "Press"] as const;
+// the placeholder of the same name in public/placeholders is shown (on the gallery page only).
+// `tag` = the event the photo belongs to; it becomes a filter tab. Add new events to this list, newest first.
+export const galleryTags = ["aBAJA 2026", "eBAJA 2026", "aBAJA 2025", "eBAJA 2025", "eBAJA 2024", "Press"] as const;
 export type GalleryTag = (typeof galleryTags)[number];
 
 export type GalleryItem = { photo: string; title: string; date: string; tag: GalleryTag; alt: string };
@@ -12,12 +14,14 @@ export const galleryItems: GalleryItem[] = [
   { photo: "pit-bay", title: "A10 in the pit bay", date: "29 July 2026", tag: "aBAJA 2026", alt: "A10 parked in the team's pit bay" },
   { photo: "three-trophies", title: "Three trophies", date: "2 August 2026", tag: "aBAJA 2026", alt: "The three trophies won at aBAJA SAEINDIA 2026" },
   { photo: "champions-stage", title: "On the Champions stage", date: "2 August 2026", tag: "aBAJA 2026", alt: "The team on the Champions stage at aBAJA SAEINDIA 2026" },
-  { photo: "valedictory", title: "Valedictory ceremony", date: "2 August 2026", tag: "Events", alt: "The valedictory ceremony at aBAJA SAEINDIA 2026" },
-  { photo: "camera-bring-up", title: "Camera and compute bring-up", date: "27 June 2026", tag: "Workshop", alt: "Team members bringing up the camera and compute on A10" },
-  { photo: "hil-testing", title: "Hardware-in-the-loop testing", date: "7 July 2026", tag: "Workshop", alt: "Hardware-in-the-loop test setup in the workshop" },
-  { photo: "night-testing", title: "Night testing before transport", date: "25 July 2026", tag: "Workshop", alt: "A10 tested at night under floodlights" },
-  { photo: "natrax-endurance", title: "NATRAX endurance run", date: "[Date]", tag: "eBAJA", alt: "eBAJA endurance run at NATRAX (photo to come)" },
-  { photo: "womens-endurance-2025", title: "Women's endurance run, 2025", date: "[Date]", tag: "eBAJA", alt: "Women's endurance run at eBAJA 2025 (photo to come)" },
+  { photo: "valedictory", title: "Valedictory ceremony", date: "2 August 2026", tag: "aBAJA 2026", alt: "The valedictory ceremony at aBAJA SAEINDIA 2026" },
+  { photo: "camera-bring-up", title: "Camera and compute bring-up", date: "27 June 2026", tag: "aBAJA 2026", alt: "Team members bringing up the camera and compute on A10" },
+  { photo: "hil-testing", title: "Hardware-in-the-loop testing", date: "7 July 2026", tag: "aBAJA 2026", alt: "Hardware-in-the-loop test setup in the workshop" },
+  { photo: "night-testing", title: "Night testing before transport", date: "25 July 2026", tag: "aBAJA 2026", alt: "A10 tested at night under floodlights" },
+  { photo: "natrax-endurance", title: "NATRAX endurance run", date: "January 2026", tag: "eBAJA 2026", alt: "eBAJA endurance run at NATRAX (photo to come)" },
+  { photo: "womens-endurance-2025", title: "Women's endurance run, 2025", date: "February 2025", tag: "eBAJA 2025", alt: "Women's endurance run at eBAJA 2025 (photo to come)" },
+  { photo: "achievements-2025-1", title: "aBAJA debut at GARC Chennai", date: "October 2025", tag: "aBAJA 2025", alt: "Team Abhyuday Racing at aBAJA SAEINDIA 2025 (photo to come)" },
+  { photo: "achievements-2024-1", title: "First car unveiled on campus", date: "1 March 2024", tag: "eBAJA 2024", alt: "The first eBAJA car unveiled on campus, 2024 (photo to come)" },
   { photo: "news-coverage", title: "News coverage", date: "[Date]", tag: "Press", alt: "Press coverage of the team (photo to come)" },
 ];
 
