@@ -31,7 +31,7 @@ export const site = {
   // Sponsorship brochure. Replace public/docs/sponsorship-brochure.pdf with the real file.
   brochureUrl: "/docs/sponsorship-brochure.pdf",
   // Recruitment form link. Leave empty to point people to the email address instead.
-  applyUrl: "",
+  applyUrl: "https://docs.google.com/forms/d/e/1FAIpQLSff1AdKS0Z4czLEJ1s0-eHlmxYorjG7DiT5z11Yr79sgLwE9A/viewform",
 };
 
 // One entry per section of the home page, in scroll order. `id` is the #anchor.
