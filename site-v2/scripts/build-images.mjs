@@ -28,6 +28,10 @@ const PLACEHOLDERS = [
   { name: "natrax-endurance", w: 1200, h: 900, label: "NATRAX endurance run", spec: "4:3 · JPG · 2000×1500" },
   { name: "womens-endurance-2025", w: 1200, h: 900, label: "Women's endurance run, 2025", spec: "4:3 · JPG · 2000×1500" },
   { name: "news-coverage", w: 1200, h: 900, label: "News coverage", spec: "4:3 · JPG · 2000×1500" },
+  { name: "achievements-2025-1", w: 1200, h: 900, label: "aBAJA 2025 photo", spec: "4:3 · JPG · 2000×1500" },
+  { name: "achievements-2025-2", w: 1200, h: 900, label: "eBAJA 2025 photo", spec: "4:3 · JPG · 2000×1500" },
+  { name: "achievements-2024-1", w: 1200, h: 900, label: "2024 car unveiling", spec: "4:3 · JPG · 2000×1500" },
+  { name: "achievements-2024-2", w: 1200, h: 900, label: "2024 team photo", spec: "4:3 · JPG · 2000×1500" },
   { name: "hero-video", w: 1600, h: 900, label: "Hero video", spec: "16:9 · MP4 (H.264) · ≤ 8 MB · 10–20 s loop" },
 ];
 

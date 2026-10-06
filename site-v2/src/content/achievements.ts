@@ -12,7 +12,8 @@ export type Competition = { name: string; where: string; when?: string; results:
 export type Season = {
   year: number;
   summary: string;
-  // Photos shown beside the results (2–3 work best). File names in media/originals, without extension.
+  // Two photos shown beside the results. File names in media/originals, without extension.
+  // Until a file exists, the placeholder of the same name in public/placeholders is shown.
   photos?: { photo: string; alt: string }[];
   competitions: Competition[];
 };
@@ -24,7 +25,6 @@ export const achievements: Season[] = [
     photos: [
       { photo: "three-trophies", alt: "The three trophies Team Abhyuday Racing won at aBAJA SAEINDIA 2026" },
       { photo: "champions-stage", alt: "The team on the Champions stage at aBAJA SAEINDIA 2026" },
-      { photo: "aeb-stop", alt: "A10 stopping for an obstacle in the winning emergency braking run" },
     ],
     competitions: [
       {
@@ -59,6 +59,10 @@ export const achievements: Season[] = [
   {
     year: 2025,
     summary: "Autonomous debut: All India Rank 5 in our first aBAJA season.",
+    photos: [
+      { photo: "achievements-2025-1", alt: "Team Abhyuday Racing at aBAJA SAEINDIA 2025 (photo to come)" },
+      { photo: "achievements-2025-2", alt: "Team Abhyuday Racing at eBAJA SAEINDIA 2025 (photo to come)" },
+    ],
     competitions: [
       {
         name: "aBAJA SAEINDIA 2025",
@@ -86,6 +90,10 @@ export const achievements: Season[] = [
   {
     year: 2024,
     summary: "Our first car of our own, unveiled on campus.",
+    photos: [
+      { photo: "achievements-2024-1", alt: "The first eBAJA car unveiled on campus, 2024 (photo to come)" },
+      { photo: "achievements-2024-2", alt: "The 2024 team with the first eBAJA car (photo to come)" },
+    ],
     competitions: [
       {
         name: "eBAJA SAEINDIA 2024",
