@@ -1,14 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState, type PointerEvent } from "react";
-import { departments, faculty, groupPhoto, leads, mentors, squads, type Person } from "@/content/team";
+import { useState, type PointerEvent } from "react";
+import { groupPhoto, leads, squads, type Person } from "@/content/team";
 import { BBox } from "@/components/ui/BBox";
 import { Picture } from "@/components/ui/Picture";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { Social, Trophy } from "@/components/ui/Icons";
+import { ArrowRight, Social } from "@/components/ui/Icons";
+import { ScrollTrigger } from "@/lib/gsap";
 import { hasPhoto } from "@/lib/photos";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const initials = (name: string) =>
   name.startsWith("[")
@@ -41,29 +44,27 @@ function untilt(e: PointerEvent<HTMLElement>) {
   e.currentTarget.style.transform = "";
 }
 
-type Crew = Person & { key: string; lead: boolean };
+function Card({ p, lead }: { p: Person; lead: boolean }) {
+  return (
+    <div className={`crew-card ${lead ? "is-lead" : "is-member"}`} onPointerMove={tilt} onPointerLeave={untilt}>
+      <Avatar p={p} />
+      <div>
+        <p className="person-name">{p.name}</p>
+        <p className="person-role">{p.role}</p>
+      </div>
+      {p.linkedin && (
+        <a className="li" href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`}>
+          <Social name="LinkedIn" size={16} /> LinkedIn
+        </a>
+      )}
+    </div>
+  );
+}
 
 export function Team() {
+  const [open, setOpen] = useState(false);
   const [season, setSeason] = useState(squads[0]?.season ?? "");
-  const [filter, setFilter] = useState("All");
-
-  const crew: Crew[] = useMemo(() => {
-    const squad = squads.find((s) => s.season === season);
-    return [
-      ...leads.map((p, i) => ({ ...p, key: `lead-${i}`, lead: true })),
-      ...(squad?.members ?? []).map((p, i) => ({ ...p, key: `m-${season}-${i}`, lead: false })),
-    ];
-  }, [season]);
-
-  // Tabs: only departments that actually have someone in them.
-  const tabs = useMemo(() => {
-    const present = new Set(crew.map((p) => p.department).filter(Boolean));
-    return ["All", ...["Leadership", ...departments].filter((d) => present.has(d))];
-  }, [crew]);
-
-  const shown = filter === "All" ? crew : crew.filter((p) => p.department === filter);
-  const shownLeads = shown.filter((p) => p.lead);
-  const shownSquad = shown.filter((p) => !p.lead);
+  const squad = squads.find((s) => s.season === season);
 
   return (
     <section id="team" className="section" aria-labelledby="team-title">
@@ -77,7 +78,7 @@ export function Team() {
               The <em>crew</em>
             </>
           }
-          lede="Faculty who back us, mentors who push us, and the students who design, wire, code and weld every car."
+          lede="The students who design, wire, code, weld and drive every car."
         />
 
         <Reveal>
@@ -86,123 +87,68 @@ export function Team() {
           </BBox>
         </Reveal>
 
-        {/* Faculty & mentors */}
         <div className="team-sub">
-          <h3>Faculty &amp; mentors</h3>
-          <p className="hud">Guidance</p>
+          <h3>Team leads</h3>
         </div>
-        <RevealGroup className="faculty-grid">
-          {[...faculty, ...mentors].map((p) => (
-            <RevealItem key={p.name} className="person">
-              <Avatar p={p} />
-              <div>
-                <p className="person-name">{p.name}</p>
-                <p className="person-role">{p.role}</p>
-              </div>
-              {p.honour && (
-                <span className="chip chip-orange honour">
-                  <Trophy size={14} /> {p.honour}
-                </span>
-              )}
+        <RevealGroup as="ul" className="crew-grid lead-grid" stagger={0.06}>
+          {leads.map((p) => (
+            <RevealItem as="li" key={p.role}>
+              <Card p={p} lead />
             </RevealItem>
           ))}
         </RevealGroup>
 
-        {/* Leads and squad */}
-        <div className="team-sub">
-          <h3>Leads &amp; squad</h3>
-          {squads.length > 1 && (
-            <label className="hud" style={{ display: "flex", gap: 10, alignItems: "center" }}>
-              Season
-              <select className="select" value={season} onChange={(e) => (setSeason(e.target.value), setFilter("All"))}>
-                {squads.map((s) => (
-                  <option key={s.season}>{s.season}</option>
-                ))}
-              </select>
-            </label>
-          )}
-          {squads.length === 1 && <p className="hud">{season}</p>}
-        </div>
-
-        <div className="team-controls">
-          <div className="tabs" role="group" aria-label="Filter by sub-team">
-            {tabs.map((t) => (
-              <button key={t} type="button" className="tab" aria-pressed={filter === t} onClick={() => setFilter(t)}>
-                {filter === t && <motion.span className="tab-bg" layoutId="team-tab" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
-                <span>{t}</span>
+        {squad && (
+          <>
+            <div className="team-more">
+              <button type="button" className="btn btn-ghost" aria-expanded={open} aria-controls="full-team" onClick={() => setOpen(!open)}>
+                {open ? "Show less" : "Explore the full team"}
+                <ArrowRight size={18} className={open ? "is-up" : "is-down"} />
               </button>
-            ))}
-          </div>
-        </div>
+            </div>
 
-        {shownLeads.length > 0 && (
-          <>
-            <p className="hud crew-label">Leads</p>
-            <motion.ul layout className="crew-grid" style={{ listStyle: "none", margin: 0, padding: 0 }} aria-live="polite">
-              <AnimatePresence mode="popLayout" initial={false}>
-                {shownLeads.map((p) => (
-                  <motion.li
-                    layout
-                    key={p.key}
-                    initial={{ opacity: 0, scale: 0.92 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.92 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className={`crew-card ${p.lead ? "is-lead" : "is-member"}`} onPointerMove={tilt} onPointerLeave={untilt}>
-                    <Avatar p={p} />
-                    <div>
-                      <p className="person-name">{p.name}</p>
-                      <p className="person-role">{p.lead ? p.role : season}</p>
-                    </div>
-                    {(p.department || p.linkedin) && <div className="reveal">
-                      {p.department && <span className="chip">{p.department}</span>}
-                      {p.linkedin && (
-                        <a className="li" href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`}>
-                          <Social name="LinkedIn" size={16} /> LinkedIn
-                        </a>
-                      )}
-                    </div>}
-                    </div>
-                  </motion.li>
-                ))}
-              </AnimatePresence>
-            </motion.ul>
-          </>
-        )}
-        {shownSquad.length > 0 && (
-          <>
-            <p className="hud crew-label">{`Squad · ${season}`}</p>
-            <motion.ul layout className="crew-grid" style={{ listStyle: "none", margin: 0, padding: 0 }} aria-live="polite">
-              <AnimatePresence mode="popLayout" initial={false}>
-                {shownSquad.map((p) => (
-                  <motion.li
-                    layout
-                    key={p.key}
-                    initial={{ opacity: 0, scale: 0.92 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.92 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className={`crew-card ${p.lead ? "is-lead" : "is-member"}`} onPointerMove={tilt} onPointerLeave={untilt}>
-                    <Avatar p={p} />
-                    <div>
-                      <p className="person-name">{p.name}</p>
-                      <p className="person-role">{p.lead ? p.role : season}</p>
-                    </div>
-                    {(p.department || p.linkedin) && <div className="reveal">
-                      {p.department && <span className="chip">{p.department}</span>}
-                      {p.linkedin && (
-                        <a className="li" href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`}>
-                          <Social name="LinkedIn" size={16} /> LinkedIn
-                        </a>
-                      )}
-                    </div>}
-                    </div>
-                  </motion.li>
-                ))}
-              </AnimatePresence>
-            </motion.ul>
+            <AnimatePresence initial={false} onExitComplete={() => ScrollTrigger.refresh()}>
+              {open && (
+                <motion.div
+                  id="full-team"
+                  key="full-team"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.6, ease }}
+                  onAnimationComplete={() => ScrollTrigger.refresh()}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="team-sub" style={{ marginTop: 32 }}>
+                    <h3>Full team</h3>
+                    {squads.length > 1 ? (
+                      <label className="hud" style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                        Season
+                        <select className="select" value={season} onChange={(e) => setSeason(e.target.value)}>
+                          {squads.map((s) => (
+                            <option key={s.season}>{s.season}</option>
+                          ))}
+                        </select>
+                      </label>
+                    ) : (
+                      <p className="hud">{`${season} · ${squad.members.length} members`}</p>
+                    )}
+                  </div>
+                  <ul className="crew-grid">
+                    {squad.members.map((p, i) => (
+                      <motion.li
+                        key={`${season}-${p.name}`}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: Math.min(i * 0.025, 0.5), ease }}
+                      >
+                        <Card p={{ ...p, role: p.role === "Team member" ? season : p.role }} lead={false} />
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </>
         )}
       </div>

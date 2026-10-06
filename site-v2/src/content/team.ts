@@ -24,20 +24,19 @@ export const mentors: Person[] = [
   { name: "Munish Raj", role: "Mentor" },
 ];
 
-// Current leads. TODO: replace "[Name]" and add photos.
+// Current leads, in display order. TODO: replace "[Name]" and add photos (media/originals/<photo>.jpg).
 export const leads: Person[] = [
-  { name: "[Name]", role: "Team Captain", department: "Leadership" },
-  { name: "[Name]", role: "Vice Captain", department: "Leadership" },
-  { name: "[Name]", role: "Autonomy Lead", department: "Autonomy" },
-  { name: "[Name]", role: "Drive-by-Wire Lead", department: "Drive-by-wire" },
-  { name: "[Name]", role: "Mechanical Lead", department: "Mechanical" },
-  { name: "[Name]", role: "Electrical Lead", department: "Electrical" },
-  { name: "[Name]", role: "Documentation Lead", department: "Documentation and sponsorship" },
-  { name: "[Name]", role: "Sponsorship Lead", department: "Documentation and sponsorship" },
+  { name: "[Name]", role: "Captain" },
+  { name: "[Name]", role: "Vice Captain" },
+  { name: "[Name]", role: "Team Manager" },
+  { name: "[Name]", role: "Mechanical Head" },
+  { name: "[Name]", role: "Drive-by-Wire Head" },
+  { name: "[Name]", role: "Software Head" },
+  { name: "[Name]", role: "Driver" },
+  { name: "[Name]", role: "Co-Driver" },
 ];
 
-// Squads by season, newest first. A year selector appears when there is more than one.
-// Add `department` to each member when known so they show up under the filter tabs.
+// Full team by season, newest first — shown under "Explore the full team". A season selector appears when there is more than one.
 export const squads: { season: string; note: string; members: Person[] }[] = [
   {
     season: "aBAJA 2025",

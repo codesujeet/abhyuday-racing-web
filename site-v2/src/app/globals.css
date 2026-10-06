@@ -669,3 +669,14 @@ h1, h2, h3 { text-wrap: balance; }
 /* Photo framing: keep the people / the car in shot when frames crop. */
 .team-banner img { object-position: 50% 78%; }
 .car-hero .frame img { object-position: 72% 55%; }
+
+/* Team: leads grid + "Explore the full team" */
+.crew-grid { list-style: none; margin: 0; padding: 0; }
+@media (min-width: 900px) { .lead-grid { grid-template-columns: repeat(4, 1fr); } }
+.lead-grid .crew-card { min-height: 170px; }
+.team-more { display: flex; justify-content: center; margin-top: 36px; }
+.team-more .arrow { transition: transform 0.3s var(--ease-out); }
+.team-more .arrow.is-down { transform: rotate(90deg); }
+.team-more .arrow.is-up { transform: rotate(-90deg); }
+.team-more .btn:hover .arrow.is-down { transform: rotate(90deg) translateX(3px); }
+.team-more .btn:hover .arrow.is-up { transform: rotate(-90deg) translateX(3px); }
