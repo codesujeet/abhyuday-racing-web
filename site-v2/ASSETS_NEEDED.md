@@ -13,7 +13,8 @@ exact name below replace the placeholder automatically on the next `npm run dev`
 | ☐ | `media/originals/natrax-endurance.jpg` | Gallery → eBAJA tab | 4:3, JPG, ~2000×1500 | `public/placeholders/natrax-endurance.svg` |
 | ☐ | `media/originals/womens-endurance-2025.jpg` | Gallery → eBAJA tab | 4:3, JPG, ~2000×1500 | `public/placeholders/womens-endurance-2025.svg` |
 | ☐ | `media/originals/news-coverage.jpg` | Gallery → Press tab | 4:3, JPG, ~2000×1500 | `public/placeholders/news-coverage.svg` |
-| ☐ | `media/originals/team-group.jpg` | Team banner (current-season group photo). Then set `groupPhoto.photo` to `"team-group"` in `src/content/team.ts` — today the banner uses the real arrival-day photo. | 16:9 landscape, JPG, ~2400×1350 | `public/placeholders/team-group.svg` |
+| ☐ | Any team photos you prefer for the Team photo stack | Team section, left of the recruitment message. Put them in `media/originals/` and list them in `teamPhotos` in `src/content/team.ts` (top photo first) | 4:3 landscape, JPG, ~2000×1500 | Uses 3 real 2026 photos today |
+| ☐ | Recruitment form link | "Join the team" button. Set `applyUrl` in `src/content/site.ts` — until then it jumps to the contact form | — | — |
 | ☐ | Lead portraits, e.g. `media/originals/lead-captain.jpg` | Team cards. Add `photo: "lead-captain"` to the person in `src/content/team.ts` | 4:5 or square, JPG, ≥ 800 px | Initials monogram (`public/placeholders/portrait.svg` for reference) |
 | ☐ | More A10 / 2025 / 2024 car photos | Car detail page galleries — add to the car's `gallery` in `src/content/cars.ts` | Any, JPG, 2000–2400 px | "Photos on their way" note |
 

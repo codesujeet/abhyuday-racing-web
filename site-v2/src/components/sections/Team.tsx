@@ -2,12 +2,13 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState, type PointerEvent } from "react";
-import { groupPhoto, leads, squads, type Person } from "@/content/team";
-import { BBox } from "@/components/ui/BBox";
+import { leads, recruitment, squads, teamPhotos, type Person } from "@/content/team";
+import { site } from "@/content/site";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { Picture } from "@/components/ui/Picture";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { ArrowRight, Social } from "@/components/ui/Icons";
+import { ArrowRight, Check, Mail, Social } from "@/components/ui/Icons";
 import { ScrollTrigger } from "@/lib/gsap";
 import { hasPhoto } from "@/lib/photos";
 
@@ -61,6 +62,24 @@ function Card({ p, lead }: { p: Person; lead: boolean }) {
   );
 }
 
+/**
+ * Three photos stacked like prints, pinned at the bottom-left corner. Hover (or tap) fans them out:
+ * the back one swings up, the middle one stays, the front one swings down.
+ */
+function PhotoStack() {
+  const [fanned, setFanned] = useState(false);
+  return (
+    <div className={`stack ${fanned ? "is-fanned" : ""}`} onClick={() => setFanned(!fanned)}>
+      {[...teamPhotos].reverse().map((p, i) => (
+        <figure key={p.photo} className={`stack-card stack-card-${i}`}>
+          <Picture name={p.photo} alt={p.alt} sizes="(min-width: 1024px) 520px, 90vw" />
+          <figcaption className="hud">{p.label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 export function Team() {
   const [open, setOpen] = useState(false);
   const [season, setSeason] = useState(squads[0]?.season ?? "");
@@ -81,11 +100,34 @@ export function Team() {
           lede="The students who design, wire, code, weld and drive every car."
         />
 
-        <Reveal>
-          <BBox className="frame team-banner tread-mask" label={groupPhoto.label}>
-            <Picture name={groupPhoto.photo} alt={groupPhoto.alt} sizes="(min-width: 1320px) 1320px, 100vw" />
-          </BBox>
-        </Reveal>
+        <div className="team-intro">
+          <Reveal from="left">
+            <PhotoStack />
+          </Reveal>
+          <Reveal from="right" className="recruit" delay={0.1}>
+            <p className="chip chip-orange">{recruitment.kicker}</p>
+            <h3 className="recruit-title">{recruitment.title}</h3>
+            <p className="muted">{recruitment.body}</p>
+            <ul className="recruit-points">
+              {recruitment.points.map((pt) => (
+                <li key={pt}>
+                  <Check size={18} />
+                  <span>{pt}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="btn-row">
+              <Magnetic>
+                <a className="btn btn-primary" href={site.applyUrl || "#support"} {...(site.applyUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                  {recruitment.cta} <ArrowRight size={18} />
+                </a>
+              </Magnetic>
+              <a className="btn btn-ghost" href={`mailto:${site.email}?subject=${encodeURIComponent("Joining Team Abhyuday Racing")}`}>
+                Ask us <Mail size={18} />
+              </a>
+            </div>
+          </Reveal>
+        </div>
 
         <div className="team-sub">
           <h3>Team leads</h3>

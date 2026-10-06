@@ -7,8 +7,21 @@ export const departments = ["Autonomy", "Drive-by-wire", "Mechanical", "Electric
 
 export type Person = { name: string; role: string; department?: string; photo?: string; linkedin?: string; honour?: string };
 
-// Banner photo. Swap to "team-group" once media/originals/team-group.jpg (current season group photo) exists.
-export const groupPhoto = { photo: "team-at-saeindia-gate", alt: "Team Abhyuday Racing at the SAEINDIA gate on arrival day in Chennai, 2026", label: "aBAJA 2026 · Chennai" };
+// Photo stack beside the recruitment message (top photo first). File names in media/originals.
+export const teamPhotos = [
+  { photo: "team-at-saeindia-gate", alt: "The team at the SAEINDIA gate on arrival day in Chennai, 2026", label: "aBAJA 2026 · Chennai" },
+  { photo: "champions-stage", alt: "The team on the Champions stage at aBAJA SAEINDIA 2026", label: "Champions stage" },
+  { photo: "valedictory", alt: "The team at the aBAJA SAEINDIA 2026 valedictory ceremony", label: "Valedictory 2026" },
+];
+
+// Recruitment block. The button uses site.applyUrl when set, otherwise it jumps to the contact form.
+export const recruitment = {
+  kicker: "Recruitment 2026–27 · Applications open",
+  title: "Build the car that drives itself.",
+  body: "No experience needed — we train you from zero. Coders, designers, welders, wire-wranglers and storytellers from every branch: if you would rather build a race car than read about one, there is a seat for you in the workshop.",
+  points: ["Design, build and race a real off-road car", "Learn ROS 2, CAN, CAD and simulation hands-on", "Compete on the national stage at BAJA SAEINDIA"],
+  cta: "Join the team",
+};
 
 export const faculty: Person[] = [
   { name: "Dr. Ravindra Kharadkar", role: "Campus Director" },
