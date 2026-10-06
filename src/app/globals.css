@@ -306,10 +306,11 @@ h1, h2, h3 { text-wrap: balance; }
 .prog ul { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
 .prog li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; font-size: 0.98rem; }
 .prog li::before { content: ""; width: 10px; height: 10px; margin-top: 8px; background: var(--orange); clip-path: polygon(0 0, 100% 50%, 0 100%); }
-.prog-abaja { border-top: 3px solid var(--orange); }
-.prog-ebaja { border-top: 3px solid var(--sky); }
-.prog-ebaja li::before { background: var(--sky); }
-.prog-ebaja h3 small { color: var(--sky); }
+/* Series colours: aBAJA = blue, eBAJA = orange */
+.prog-abaja { border-top: 3px solid var(--sky); }
+.prog-abaja li::before { background: var(--sky); }
+.prog-abaja h3 small { color: var(--sky); }
+.prog-ebaja { border-top: 3px solid var(--orange); }
 
 /* Autonomy pipeline */
 .pipeline { margin-top: clamp(64px, 9vw, 120px); }
@@ -330,8 +331,8 @@ h1, h2, h3 { text-wrap: balance; }
 @media (min-width: 900px) { .compete { grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; } }
 .compete h3 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95; }
 .compete-list { display: grid; gap: 12px; }
-.compete-item { display: grid; gap: 6px; padding: 20px 22px; border-left: 3px solid var(--orange); background: var(--bg-2); }
-.compete-item:nth-child(2) { border-left-color: var(--sky); }
+.compete-item { display: grid; gap: 6px; padding: 20px 22px; border-left: 3px solid var(--sky); background: var(--bg-2); }
+.compete-item:nth-child(2) { border-left-color: var(--orange); }
 .compete-item strong { font-family: var(--font-display); font-size: 1.5rem; text-transform: none; letter-spacing: 0.02em; }
 .compete-item span { color: var(--muted); font-size: 0.98rem; }
 
@@ -598,7 +599,7 @@ h1, h2, h3 { text-wrap: balance; }
 /* ==========================================================================
    Partners
    ========================================================================== */
-.marquee { --gap: clamp(28px, 4vw, 56px); display: grid; gap: var(--gap); overflow: hidden; margin-inline: calc(var(--gutter) * -1); padding-block: 6px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee { --gap: clamp(28px, 4vw, 56px); display: grid; gap: var(--gap); overflow: hidden; margin-inline: calc(var(--gutter) * -1); padding-block: 34px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 @media (min-width: 1320px) { .marquee { margin-inline: calc((100vw - var(--wrap)) / -2 - var(--gutter)); } }
 .marquee-row { display: flex; gap: var(--gap); width: max-content; margin: 0; padding: 0; list-style: none; animation: marquee 42s linear infinite; }
 .marquee-row li { display: flex; }
@@ -606,10 +607,9 @@ h1, h2, h3 { text-wrap: balance; }
 .marquee:hover .marquee-row { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
 .logo-tile { flex: none; width: clamp(170px, 20vw, 240px); aspect-ratio: 2 / 1; display: grid; place-items: center; padding: 18px 26px; background: #f4f5f7; transition: transform 0.35s var(--ease-out), box-shadow 0.35s; }
-.logo-tile img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; filter: grayscale(1) contrast(1.1); opacity: 0.8; transition: filter 0.35s, opacity 0.35s; }
-.logo-tile:hover img, a.logo-tile:focus-visible img { filter: none; opacity: 1; }
+.logo-tile img { max-height: 100%; max-width: 100%; width: auto; object-fit: contain; }
 .logo-tile.small img { max-height: 60%; }
-.logo-tile:hover, a.logo-tile:focus-visible { transform: translateY(-3px); box-shadow: 0 0 0 2px var(--orange); }
+.logo-tile:hover, a.logo-tile:focus-visible { transform: translateY(-3px); box-shadow: 0 0 0 2px var(--orange), 0 0 18px 2px rgb(238 114 52 / 0.65), 0 0 42px 6px rgb(238 114 52 / 0.3); }
 .partner-groups { margin-top: clamp(48px, 7vw, 80px); display: grid; gap: 40px; }
 .partner-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); margin-top: 18px; }
 .partner-grid { list-style: none; padding: 0; }
@@ -727,12 +727,12 @@ h1, h2, h3 { text-wrap: balance; }
 .recruit-points svg { color: var(--orange); margin-top: 4px; }
 
 /* Achievement cards: series glow (orange aBAJA, blue eBAJA) */
-.comp.is-abaja { border-color: rgb(238 114 52 / 0.45); background: linear-gradient(150deg, rgb(238 114 52 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(238 114 52 / 0.45); }
-.comp.is-ebaja { border-color: rgb(71 163 220 / 0.45); background: linear-gradient(150deg, rgb(71 163 220 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(71 163 220 / 0.45); }
+.comp.is-abaja { border-color: rgb(71 163 220 / 0.45); background: linear-gradient(150deg, rgb(71 163 220 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(71 163 220 / 0.45); }
+.comp.is-ebaja { border-color: rgb(238 114 52 / 0.45); background: linear-gradient(150deg, rgb(238 114 52 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(238 114 52 / 0.45); }
 .comp.is-other { border-color: var(--line-2); }
 .comp { transition: box-shadow 0.35s, border-color 0.35s; }
-.comp.is-abaja:hover { box-shadow: 0 0 60px -10px rgb(238 114 52 / 0.6); }
-.comp.is-ebaja:hover { box-shadow: 0 0 60px -10px rgb(71 163 220 / 0.6); }
+.comp.is-abaja:hover { box-shadow: 0 0 60px -10px rgb(71 163 220 / 0.6); }
+.comp.is-ebaja:hover { box-shadow: 0 0 60px -10px rgb(238 114 52 / 0.6); }
 
 /* Garage cards: code, name placeholder, class */
 .car-name { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--muted); margin-top: -10px; }
@@ -769,3 +769,10 @@ h1, h2, h3 { text-wrap: balance; }
 .track-buggy { position: absolute; left: 0; top: 0; width: 72px; height: 41px; opacity: 0; transform-origin: 50% 100%; pointer-events: none; will-change: transform; filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.5)); }
 .track-buggy svg { width: 100%; height: 100%; display: block; }
 @media (max-width: 640px) { .track-buggy { width: 46px; height: 26px; } }
+
+/* Car cards: series colour (aBAJA blue, eBAJA orange) */
+.car-panel.is-abaja .car-year { -webkit-text-stroke-color: var(--sky); }
+.car-panel.is-abaja .car-top .chip { border-color: rgb(71 163 220 / 0.55); color: var(--sky); }
+.car-panel.is-ebaja .car-top .chip { border-color: rgb(238 114 52 / 0.55); color: var(--orange); }
+.car-panel.is-abaja { border-top: 3px solid var(--sky); }
+.car-panel.is-ebaja { border-top: 3px solid var(--orange); }

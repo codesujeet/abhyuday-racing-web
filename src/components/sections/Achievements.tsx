@@ -10,8 +10,8 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { Trophy } from "@/components/ui/Icons";
 import { tilt, untilt } from "@/lib/tilt";
 
-// Card colour: orange for aBAJA, blue for eBAJA and everything else (faculty honours).
-const series = (name: string) => (/^aBAJA/i.test(name) ? "is-abaja" : "is-ebaja");
+// Card colour: orange for eBAJA, blue for aBAJA and everything else (faculty honours).
+const series = (name: string) => (/^eBAJA/i.test(name) ? "is-ebaja" : "is-abaja");
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

@@ -99,7 +99,7 @@ function Garage() {
           </div>
 
           {cars.map((c) => (
-            <article key={c.slug} className={`car-panel ${c.built ? "" : "is-next"}`} aria-labelledby={`car-${c.slug}`}>
+            <article key={c.slug} className={`car-panel is-${c.category.toLowerCase()} ${c.built ? "" : "is-next"}`} aria-labelledby={`car-${c.slug}`}>
               <BBox className="frame car-photo" label={`${c.category} · ${c.year}`}>
                 <Picture name={c.photo} alt={c.photoAlt} sizes="(min-width: 1024px) 640px, 86vw" />
               </BBox>
