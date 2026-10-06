@@ -434,7 +434,12 @@ h1, h2, h3 { text-wrap: balance; }
 .comp li .t { font-weight: 600; }
 .comp li.headline .t { font-size: 1.08rem; }
 .comp-hero { border-color: rgb(238 114 52 / 0.45); background: linear-gradient(150deg, rgb(238 114 52 / 0.12), var(--bg-2) 55%); }
-.tl-media { aspect-ratio: 4 / 3; }
+.tl-media { display: grid; gap: 14px; }
+.tl-photo-wrap { perspective: 900px; }
+.tl-photo { aspect-ratio: 4 / 3; border: 1px solid var(--line); transition: transform 0.25s var(--ease-out), box-shadow 0.3s; transform-style: preserve-3d; }
+.tl-photo:hover { box-shadow: 0 24px 50px -18px rgb(238 114 52 / 0.45); }
+.tl-photo picture { height: 100%; }
+@media (min-width: 640px) and (max-width: 1023px) { .tl-media { grid-template-columns: 1fr 1fr; } }
 
 /* ==========================================================================
    Cars
@@ -467,7 +472,7 @@ h1, h2, h3 { text-wrap: balance; }
 @media (max-width: 767px) { .featured-steps { display: none; } }
 .crew-grid > li { display: grid; }
 .crew-card { height: 100%; transition: border-color 0.3s, transform 0.25s var(--ease-out); }
-.tl-media > div, .tl-media .frame { height: 100%; }
+
 .car-photo picture, .team-banner picture { height: 100%; }
 
 .garage { margin-top: clamp(64px, 9vw, 120px); }
@@ -701,3 +706,11 @@ h1, h2, h3 { text-wrap: balance; }
 .recruit-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .recruit-points li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
 .recruit-points svg { color: var(--orange); margin-top: 4px; }
+
+/* Achievement cards: series glow (orange aBAJA, blue eBAJA) */
+.comp.is-abaja { border-color: rgb(238 114 52 / 0.45); background: linear-gradient(150deg, rgb(238 114 52 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(238 114 52 / 0.45); }
+.comp.is-ebaja { border-color: rgb(71 163 220 / 0.45); background: linear-gradient(150deg, rgb(71 163 220 / 0.13), var(--bg-2) 55%); box-shadow: 0 0 40px -14px rgb(71 163 220 / 0.45); }
+.comp.is-other { border-color: var(--line-2); }
+.comp { transition: box-shadow 0.35s, border-color 0.35s; }
+.comp.is-abaja:hover { box-shadow: 0 0 60px -10px rgb(238 114 52 / 0.6); }
+.comp.is-ebaja:hover { box-shadow: 0 0 60px -10px rgb(71 163 220 / 0.6); }

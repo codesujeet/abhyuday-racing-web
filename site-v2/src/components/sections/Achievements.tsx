@@ -4,11 +4,13 @@ import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { achievements, type Result } from "@/content/achievements";
 import { gsap } from "@/lib/gsap";
-import { BBox } from "@/components/ui/BBox";
 import { Picture } from "@/components/ui/Picture";
-import { Reveal } from "@/components/ui/Reveal";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Trophy } from "@/components/ui/Icons";
+import { tilt, untilt } from "@/lib/tilt";
+
+// Card colour by series: orange for aBAJA, blue for eBAJA, neutral for anything else.
+const series = (name: string) => (/^aBAJA/i.test(name) ? "is-abaja" : /^eBAJA/i.test(name) ? "is-ebaja" : "is-other");
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -60,7 +62,6 @@ export function Achievements() {
           <div ref={fill} className="tl-fill" aria-hidden="true" />
 
           {achievements.map((season, si) => {
-            const fromSide = si % 2 === 0 ? "right" : "left";
             return (
               <article key={season.year} className="tl-year" aria-labelledby={`year-${season.year}`}>
                 <motion.span
@@ -85,11 +86,19 @@ export function Achievements() {
                   <p className="tl-summary">{season.summary}</p>
                 </div>
 
-                <Reveal className="tl-card" from={fromSide}>
-                  {season.competitions.map((c) => {
-                    const hero = c.results.some((r) => r.headline);
+                <div className="tl-card">
+                  {season.competitions.map((c, ci) => {
+                    // The very first card is always on screen when you arrive; the rest slide in from the right.
+                    const first = si === 0 && ci === 0;
                     return (
-                      <div key={c.name} className={`comp ${hero ? "comp-hero" : ""}`}>
+                      <motion.div
+                        key={c.name}
+                        className={`comp ${series(c.name)}`}
+                        initial={first ? false : { opacity: 0, x: 80 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.25 }}
+                        transition={{ duration: 0.75, delay: first ? 0 : 0.08, ease }}
+                      >
                         <div className="comp-head">
                           <h4>{c.name}</h4>
                           <p className="hud">
@@ -105,17 +114,28 @@ export function Achievements() {
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     );
                   })}
-                </Reveal>
+                </div>
 
-                {season.photo && (
-                  <Reveal className="tl-media" from={fromSide === "right" ? "left" : "right"} delay={0.1}>
-                    <BBox className="frame" label={`${season.year} · Awards`}>
-                      <Picture name={season.photo} alt={season.photoAlt ?? ""} sizes="(min-width: 1024px) 600px, 100vw" />
-                    </BBox>
-                  </Reveal>
+                {season.photos && season.photos.length > 0 && (
+                  <div className="tl-media">
+                    {season.photos.map((p, pi) => (
+                      <motion.div
+                        key={p.photo}
+                        className="tl-photo-wrap"
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.8, delay: pi * 0.1, ease }}
+                      >
+                        <div className="frame tl-photo" onPointerMove={tilt} onPointerLeave={untilt}>
+                          <Picture name={p.photo} alt={p.alt} sizes="(min-width: 1024px) 600px, 100vw" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 )}
               </article>
             );

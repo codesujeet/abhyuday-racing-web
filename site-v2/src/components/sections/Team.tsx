@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useState, type PointerEvent } from "react";
+import { useState } from "react";
 import { leads, recruitment, squads, teamPhotos, type Person } from "@/content/team";
 import { site } from "@/content/site";
 import { Magnetic } from "@/components/ui/Magnetic";
@@ -11,6 +11,7 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { ArrowRight, Check, Mail, Social } from "@/components/ui/Icons";
 import { ScrollTrigger } from "@/lib/gsap";
 import { hasPhoto } from "@/lib/photos";
+import { tilt, untilt } from "@/lib/tilt";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -30,19 +31,6 @@ function Avatar({ p }: { p: Person }) {
       {p.photo && hasPhoto(p.photo) ? <Picture name={p.photo} alt="" sizes="64px" /> : initials(p.name)}
     </span>
   );
-}
-
-/** Slight 3D tilt towards the pointer (mouse only). */
-function tilt(e: PointerEvent<HTMLElement>) {
-  if (e.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const el = e.currentTarget;
-  const r = el.getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width - 0.5;
-  const y = (e.clientY - r.top) / r.height - 0.5;
-  el.style.transform = `perspective(700px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg) translateZ(0)`;
-}
-function untilt(e: PointerEvent<HTMLElement>) {
-  e.currentTarget.style.transform = "";
 }
 
 function Card({ p, lead }: { p: Person; lead: boolean }) {

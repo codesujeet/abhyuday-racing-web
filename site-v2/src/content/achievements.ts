@@ -12,8 +12,8 @@ export type Competition = { name: string; where: string; when?: string; results:
 export type Season = {
   year: number;
   summary: string;
-  photo?: string; // file name in media/originals, without extension
-  photoAlt?: string;
+  // Photos shown beside the results (2–3 work best). File names in media/originals, without extension.
+  photos?: { photo: string; alt: string }[];
   competitions: Competition[];
 };
 
@@ -21,8 +21,11 @@ export const achievements: Season[] = [
   {
     year: 2026,
     summary: "Three awards at the aBAJA finals with A10.",
-    photo: "three-trophies",
-    photoAlt: "The three trophies Team Abhyuday Racing won at aBAJA SAEINDIA 2026",
+    photos: [
+      { photo: "three-trophies", alt: "The three trophies Team Abhyuday Racing won at aBAJA SAEINDIA 2026" },
+      { photo: "champions-stage", alt: "The team on the Champions stage at aBAJA SAEINDIA 2026" },
+      { photo: "aeb-stop", alt: "A10 stopping for an obstacle in the winning emergency braking run" },
+    ],
     competitions: [
       {
         name: "aBAJA SAEINDIA 2026 — Finals",
