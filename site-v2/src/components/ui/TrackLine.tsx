@@ -8,29 +8,27 @@ const VB_W = 1200;
 const VB_H = 40;
 const WHEEL_R = 6.5; // in buggy SVG units (buggy is drawn 60 units wide)
 
-/** Small side-view buggy in A10's livery. Wheels are separate groups so they can spin. */
+/** Small white side-view buggy. Wheels are separate groups so they can spin. */
 function Buggy({ wheelRefs }: { wheelRefs: RefObject<(SVGGElement | null)[]> }) {
   const wheel = (cx: number, i: number) => (
     <g transform={`translate(${cx} 26)`}>
       <g ref={(el) => void (wheelRefs.current[i] = el)}>
-        <circle r={WHEEL_R} fill="#15171c" stroke="#3a3f4d" strokeWidth="2" />
-        <circle r="2.6" fill="#c9ced8" />
-        <path d="M0 -6 V6 M-6 0 H6" stroke="#6b7183" strokeWidth="1" />
+        <circle r={WHEEL_R} fill="#fff" />
+        <circle r="2.4" fill="#0A0B0F" />
+        <path d="M0 -5.5 V5.5 M-5.5 0 H5.5" stroke="#0A0B0F" strokeWidth="1.1" />
       </g>
     </g>
   );
   return (
     <svg viewBox="0 0 60 34" width="60" height="34" aria-hidden="true">
       {/* roll cage */}
-      <path d="M17 16 L22 5 L38 5 L45 15 M22 5 L28 15" fill="none" stroke="#e6e8ee" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M17 16 L22 5 L38 5 L45 15 M22 5 L28 15" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinejoin="round" />
       {/* beacon */}
-      <rect x="35" y="1.5" width="3" height="3.5" rx="0.8" fill="#47A3DC" />
+      <rect x="35" y="1.5" width="3" height="3.5" rx="0.8" fill="#fff" />
       {/* driver helmet */}
-      <circle cx="31" cy="10.5" r="3.2" fill="#47A3DC" />
+      <circle cx="31" cy="10.5" r="3.2" fill="#fff" />
       {/* body + livery stripe */}
-      <path d="M5 21 L10 14.5 L46 14.5 L55 19 L55 23.5 L5 23.5 Z" fill="#EE7234" />
-      <path d="M14 18 L41 18 L37 21.5 L14 21.5 Z" fill="#2D5BB7" />
-      <path d="M43 16.5 L50 19 L46 21.5 Z" fill="#B88BE0" />
+      <path d="M5 21 L10 14.5 L46 14.5 L55 19 L55 23.5 L5 23.5 Z" fill="#fff" />
       {wheel(15, 0)}
       {wheel(46, 1)}
     </svg>
@@ -55,8 +53,8 @@ export function TrackLine() {
     if (!inView || !p || !svg || !car) return;
 
     const total = p.getTotalLength();
+    const draw = (t: number) => p.setAttribute("stroke-dashoffset", String(1 - t));
     const place = (t: number) => {
-      p.setAttribute("stroke-dashoffset", String(1 - t));
       const sx = svg.clientWidth / VB_W;
       const sy = svg.clientHeight / VB_H;
       const len = t * total;
@@ -77,17 +75,22 @@ export function TrackLine() {
     };
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      draw(1);
       place(1);
       car.style.opacity = "1";
       return;
     }
+    draw(0);
     place(0);
     car.style.opacity = "1";
-    const controls = animate(0, 1, { duration: 2.2, delay: 0.2, ease: [0.45, 0, 0.25, 1], onUpdate: place });
+    // The line draws first; the buggy follows a little slower and catches up at the end.
+    const line = animate(0, 1, { duration: 1.8, delay: 0.2, ease: [0.16, 1, 0.3, 1], onUpdate: draw });
+    const drive = animate(0, 1, { duration: 2.8, delay: 0.25, ease: [0.45, 0, 0.3, 1], onUpdate: place });
     const onResize = () => place(1);
     window.addEventListener("resize", onResize);
     return () => {
-      controls.stop();
+      line.stop();
+      drive.stop();
       window.removeEventListener("resize", onResize);
     };
   }, [inView]);
