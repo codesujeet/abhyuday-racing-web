@@ -409,13 +409,14 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .tl-year { position: relative; display: grid; gap: 22px; }
 @media (min-width: 1024px) {
-  .tl-year { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 28px 120px; align-items: start; }
-  .tl-year .tl-label { grid-column: 1; grid-row: 1; text-align: right; }
+  /* Year title centred on the line; photos and cards side by side below, always the same height. */
+  .tl-year { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 32px 120px; align-items: start; }
+  .tl-year .tl-label { grid-column: 1 / -1; grid-row: 1; justify-self: center; text-align: center; position: relative; z-index: 1; background: var(--bg); padding: 8px 28px; }
   .tl-year .tl-media { grid-column: 1; grid-row: 2; }
-  .tl-year .tl-card { grid-column: 2; grid-row: 1 / span 2; }
-  .tl-year:nth-child(even of .tl-year) .tl-label { grid-column: 2; text-align: left; }
+  .tl-year .tl-card { grid-column: 2; grid-row: 2; }
   .tl-year:nth-child(even of .tl-year) .tl-media { grid-column: 2; }
   .tl-year:nth-child(even of .tl-year) .tl-card { grid-column: 1; }
+  .tl-year .tl-dot { display: none; }
 }
 .tl-dot { position: absolute; left: -33px; top: 22px; width: 18px; height: 18px; background: var(--bg); border: 3px solid var(--orange); transform: rotate(45deg); }
 @media (min-width: 1024px) { .tl-dot { left: 50%; top: 40px; margin-left: -9px; } }
@@ -437,9 +438,12 @@ h1, h2, h3 { text-wrap: balance; }
 .tl-media { display: grid; gap: 14px; }
 @media (min-width: 1024px) {
   /* two photos that stretch to the height of the cards beside them */
-  .tl-year .tl-media { align-self: stretch; grid-template-rows: 1fr 1fr; }
-  .tl-year .tl-media .tl-photo-wrap { min-height: 0; }
-  .tl-year .tl-media .tl-photo { aspect-ratio: auto; height: 100%; min-height: 170px; }
+  .tl-year .tl-media { align-self: stretch; grid-template-rows: 1fr 1fr; min-height: 0; }
+  .tl-year .tl-media.is-short { grid-template-rows: 1fr; grid-template-columns: 1fr 1fr; }
+  /* Images are absolutely positioned so they never push the row taller than the cards. */
+  .tl-year .tl-media .tl-photo-wrap { min-height: 0; height: 100%; }
+  .tl-year .tl-media .tl-photo { position: relative; aspect-ratio: auto; height: 100%; min-height: 110px; }
+  .tl-year .tl-media .tl-photo picture { position: absolute; inset: 0; }
 }
 .tl-photo-wrap { perspective: 900px; }
 .tl-photo { aspect-ratio: 4 / 3; border: 1px solid var(--line); transition: transform 0.25s var(--ease-out), box-shadow 0.3s; transform-style: preserve-3d; }

@@ -120,7 +120,7 @@ export function Achievements() {
                 </div>
 
                 {season.photos && season.photos.length > 0 && (
-                  <div className="tl-media">
+                  <div className={`tl-media ${season.competitions.length === 1 ? "is-short" : ""}`}>
                     {season.photos.map((p, pi) => (
                       <motion.div
                         key={p.photo}
