@@ -10,7 +10,7 @@ import { markReady } from "@/lib/ready";
 const TYPE_START = 1000; // after logo + glow + name have faded in
 const TYPE_STEP = 55; // per character
 const HOLD = 450; // pause after typing
-const FLY = 850; // logo flies to the nav
+const FLY = 950; // logo flies to the nav
 
 /**
  * Landing intro, played on every page load: logo with an orange glow and the team name,
@@ -41,6 +41,11 @@ export function Preloader() {
     // Fly the logo into the nav brand slot, then fade the black screen away.
     at(typedAt, () => {
       setState("fly");
+      // Wait one frame so the fade-in animation is released before the flight starts.
+      requestAnimationFrame(() => requestAnimationFrame(fly));
+    });
+
+    const fly = () => {
       const logo = logoRef.current;
       const target = document.querySelector<HTMLElement>(".nav .brand img");
       if (logo && target) {
@@ -48,14 +53,15 @@ export function Preloader() {
         const b = target.getBoundingClientRect();
         const dx = b.left + b.width / 2 - (a.left + a.width / 2);
         const dy = b.top + b.height / 2 - (a.top + a.height / 2);
-        animate(logo, { x: dx, y: dy, scale: b.width / a.width }, { duration: FLY / 1000, ease: [0.76, 0, 0.24, 1] });
+        animate(logo, { x: dx, y: dy, scale: b.width / a.width }, { duration: FLY / 1000, ease: [0.65, 0, 0.35, 1] });
       }
       if (rootRef.current) {
-        animate(rootRef.current, { backgroundColor: "rgba(0,0,0,0)" }, { duration: 0.6, delay: (FLY / 1000) * 0.45 });
+        animate(rootRef.current, { backgroundColor: "rgba(0,0,0,0)" }, { duration: 0.7, delay: (FLY / 1000) * 0.3, ease: "easeOut" });
       }
-      at(FLY * 0.5, markReady);
-    });
-    at(typedAt + FLY + 50, () => {
+      at(FLY * 0.45, markReady);
+    };
+    // Hand over to the real nav logo the moment the flight lands (same size, same spot).
+    at(typedAt + FLY + 120, () => {
       document.documentElement.classList.remove("is-preloading");
       setState("done");
     });

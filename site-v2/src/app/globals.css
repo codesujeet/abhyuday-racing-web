@@ -245,6 +245,8 @@ h1, h2, h3 { text-wrap: balance; }
 .intro-tag { margin-top: clamp(28px, 8vh, 80px); min-height: 1.2em; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.08em; font-size: clamp(1.4rem, 3.4vw, 2.4rem); color: #fff; text-shadow: 0 0 18px rgb(238 114 52 / 0.75), 0 0 2px rgb(255 255 255 / 0.6); white-space: nowrap; }
 .intro-caret { display: inline-block; width: 0.08em; height: 0.9em; margin-left: 0.08em; vertical-align: -0.08em; background: var(--orange); animation: intro-caret 0.8s steps(1) infinite; }
 .preloader.is-flying .intro-name, .preloader.is-flying .intro-tag, .preloader.is-flying .intro-glow { opacity: 0; transition: opacity 0.35s; animation: none; }
+/* Release the fade-in animation so the scripted flight to the nav can move the logo. */
+.preloader.is-flying .intro-logo { animation: none; opacity: 1; filter: none; }
 .is-preloading .nav .brand img { opacity: 0; }
 @keyframes intro-logo { from { opacity: 0; transform: scale(0.82); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes intro-glow { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
