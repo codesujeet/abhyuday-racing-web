@@ -33,8 +33,11 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-// Runs before first paint: the intro plays on every load, except for visitors who prefer less motion.
-const preloadGate = `try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("skip-preload")}catch(e){}`;
+// Runs before first paint:
+// - the intro plays on every load, except for visitors who prefer less motion;
+// - a reload always starts from the top of the home page (no restored scroll position, no #section),
+//   so the intro and every scroll effect play again. Shared links like /#cars still open that section.
+const preloadGate = `try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("skip-preload");if("scrollRestoration" in history)history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"&&location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0)}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

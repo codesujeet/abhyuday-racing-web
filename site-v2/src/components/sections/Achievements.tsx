@@ -41,11 +41,15 @@ export function Achievements() {
       );
       // Party popper when the line reaches each year title (it tracks the 65% mark of the screen). Once per year.
       tl.current?.querySelectorAll<HTMLElement>(".tl-year").forEach((year) => {
+        let fired = false;
         ScrollTrigger.create({
           trigger: year.querySelector(".tl-label"),
           start: "top 65%",
-          once: true,
           onEnter: () => {
+            // Never fire behind the landing intro; wait until it has gone.
+            if (fired || document.documentElement.classList.contains("is-preloading")) return;
+            fired = true;
+            year.dataset.confetti = "fired";
             const card = year.querySelector(".tl-card");
             const media = year.querySelector(".tl-media");
             if (card) burstAround(card, 14);
