@@ -1,52 +1,60 @@
 import type { Metadata, Viewport } from "next";
-import { Anybody, Atkinson_Hyperlegible_Next } from "next/font/google";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { Inter, JetBrains_Mono, Saira_Condensed } from "next/font/google";
+import { Footer } from "@/components/layout/Footer";
+import { Preloader } from "@/components/layout/Preloader";
+import { Providers } from "@/components/layout/Providers";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const anybody = Anybody({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["wdth"],
-  variable: "--font-anybody",
-  display: "swap",
-});
-
-const atkinson = Atkinson_Hyperlegible_Next({
-  subsets: ["latin"],
-  variable: "--font-atkinson",
-  adjustFontFallback: false,
-  display: "swap",
-});
+const saira = Saira_Condensed({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-saira", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-jetbrains", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} | aBAJA & eBAJA, GHRCEM Pune`, template: `%s | ${site.name}` },
+  title: { default: `${site.name} — Autonomous & electric off-road racing, GHRCEM Pune`, template: `%s | ${site.name}` },
   description: site.description,
+  applicationName: site.name,
+  keywords: ["Team Abhyuday Racing", "aBAJA", "eBAJA", "BAJA SAEINDIA", "autonomous vehicle", "GHRCEM Pune", "student motorsport", "A10"],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: site.name,
     title: site.name,
     description: site.description,
-    images: [{ url: "/img/hero-a10-aeb-run-1440.webp", width: 1440, height: 810, alt: "A10 during the emergency braking test" }],
+    url: "/",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "A10, Team Abhyuday Racing's autonomous buggy" }],
   },
+  twitter: { card: "summary_large_image", title: site.name, description: site.description, images: ["/og.jpg"] },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#131A35",
+  themeColor: "#0A0B0F",
+  colorScheme: "dark",
 };
+
+// Runs before first paint:
+// - the intro plays on every load, except for visitors who prefer less motion;
+// - a reload always starts from the top of the home page (no restored scroll position, no #section),
+//   so the intro and every scroll effect play again. Shared links like /#cars still open that section.
+const preloadGate = `try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("skip-preload");if("scrollRestoration" in history)history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"&&location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0)}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${anybody.variable} ${atkinson.variable}`}>
+    <html lang="en-IN" className={`${saira.variable} ${inter.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: preloadGate }} />
+      </head>
       <body>
         <a className="skip" href="#main">
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
+        <Preloader />
+        <Providers>
+          {children}
+          <Footer />
+        </Providers>
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

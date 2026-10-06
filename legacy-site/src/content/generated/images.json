@@ -1,0 +1,108 @@
+{
+  "aeb-stop": {
+    "width": 2400,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "camera-bring-up": {
+    "width": 2400,
+    "height": 1807,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "champions-stage": {
+    "width": 2400,
+    "height": 1807,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "hero-a10-aeb-run": {
+    "width": 2400,
+    "height": 1350,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "hil-testing": {
+    "width": 1807,
+    "height": 2400,
+    "widths": [
+      480,
+      960,
+      1440,
+      1807
+    ]
+  },
+  "night-testing": {
+    "width": 2400,
+    "height": 1807,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "pit-bay": {
+    "width": 2400,
+    "height": 1807,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "team-at-saeindia-gate": {
+    "width": 2400,
+    "height": 1807,
+    "widths": [
+      480,
+      960,
+      1440,
+      1920,
+      2400
+    ]
+  },
+  "three-trophies": {
+    "width": 1807,
+    "height": 2400,
+    "widths": [
+      480,
+      960,
+      1440,
+      1807
+    ]
+  },
+  "valedictory": {
+    "width": 1280,
+    "height": 960,
+    "widths": [
+      480,
+      960,
+      1280
+    ]
+  }
+}

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The previous website, kept for reference only.
+    "legacy-site/**",
   ]),
 ]);
 

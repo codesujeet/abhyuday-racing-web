@@ -1,6 +1,6 @@
 # Content map
 
-Where every fact on the v2 site comes from. Two source repositories:
+Where every fact on the site comes from. Two source repositories (the previous site now lives in `legacy-site/` of this repo):
 
 - **`abhyuday-racing-web`** (this repo, `main`) — the current site. **Primary source.**
 - **`baja`** (github.com/cipheroot6/baja) — an older prototype. Used only where it adds something that does not conflict.
