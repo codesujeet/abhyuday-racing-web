@@ -762,3 +762,10 @@ h1, h2, h3 { text-wrap: balance; }
   .wall-col:nth-child(5) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .wall-col { animation: none !important; } }
+
+/* Section heading line + the buggy that drives along it */
+.track { position: relative; color: var(--orange); }
+.track .trajectory { display: block; }
+.track-buggy { position: absolute; left: 0; top: 0; width: 72px; height: 41px; opacity: 0; transform-origin: 50% 100%; pointer-events: none; will-change: transform; filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.5)); }
+.track-buggy svg { width: 100%; height: 100%; display: block; }
+@media (max-width: 640px) { .track-buggy { width: 46px; height: 26px; } }

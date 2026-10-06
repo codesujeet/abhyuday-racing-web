@@ -2,11 +2,12 @@
 
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import { TrackLine } from "./TrackLine";
 
 type Props = { index: string; kicker: string; title: ReactNode; lede?: ReactNode; aside?: ReactNode; id?: string };
 const ease = [0.16, 1, 0.3, 1] as const;
 
-/** Big section title with a HUD label and a trajectory line that draws itself. */
+/** Big section title with a HUD label and a trajectory line that draws itself, with a buggy driving along it. */
 export function SectionHead({ index, kicker, title, lede, aside, id }: Props) {
   return (
     <header className="sec-head">
@@ -34,19 +35,7 @@ export function SectionHead({ index, kicker, title, lede, aside, id }: Props) {
         </div>
         {aside}
       </div>
-      <svg className="trajectory" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
-        <motion.path
-          d="M0 30 C 200 30, 260 8, 480 10 S 820 32, 1000 22 S 1150 8, 1200 10"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          vectorEffect="non-scaling-stroke"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.8, ease, delay: 0.2 }}
-        />
-      </svg>
+      <TrackLine />
       {lede && (
         <motion.p
           className="lede"
